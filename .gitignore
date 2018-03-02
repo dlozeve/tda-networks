@@ -10,3 +10,4 @@ data/
 *.synctex.gz
 */auto/
 .ipynb_checkpoints/
+__pycache__/
