@@ -1,0 +1,90 @@
+\documentclass[article,a4paper,11pt,openany,extrafontsizes]{memoir}
+
+\input{preamble}
+
+\usepackage[backend=biber,style=ieee,url=false,arxiv=abs]{biblatex}
+\addbibresource{proposal.bib}
+
+\tightlists%
+
+\begin{document}
+
+\maketitle
+
+% \subsection*{Title}
+
+% Topological Data Analysis of Time-dependent Networks
+
+\subsection*{Supervisors}
+
+Dr Heather Harrington (Mathematical Institute) and Dr Gesine Reinert
+(Department of Statistics)
+
+\subsection*{Description}
+
+Topological Data Analysis (TDA)~\cite{chazal_introduction_2017,
+  oudot_persistence_2015, carlsson_topology_2009,
+  edelsbrunner_computational_2010} is a family of techniques gaining
+an increasing importance in the analysis and visualization of
+high-dimensional data in machine learning applications.
+
+In this project, we will apply TDA techniques and persistent homology
+to time-dependent networks, in order to understand how the topological
+structure evolves over time in complex multilayer
+networks~\cite{kivela_multilayer_2014, porter_dynamical_2014}.
+
+There are two ways of obtaining time-dependent networks. Network data
+is available easily in many contexts: social networks and biological
+processes are two examples of systems evolving over time and that can
+be modelled as a graph. For instance, in social networks, links in ego
+networks have already been studied in the context of
+time-dependency~\cite{tabourier_predicting_2016}.
+
+The other large category is time series. It is possible to use a
+similarity measure to build a network from a set of time series taken
+from the same physical process. Although it could be applied to any
+set of time series, this has already been studied in the case of
+coupled oscillators (such as Kuramoto
+oscillators)~\cite{stolz_persistent_2017, schaub_graph_2016}. It is
+thus easy to find relevant datasets or to generate interesting data
+from physical simulations.
+
+It is then possible to apply existing TDA and persistent homology
+techniques to the networks, taking into account the temporal
+dimension. Certain methods have already been implemented in
+topological data analysis libraries~\cite{tierny_topology_2017,
+  maria_gudhi_2014}, although they would have to be adapted to network
+data, and applied repeatedly to each time step. There is also a wide
+range of methods to explore, from the choice of the similarity
+measure, to the choice of filtration (in order to build a simplicial
+complex on the network), to the representation of topological
+structure. Each of these choices has a great influence on the final
+interpretation of the data, and may need to be adapted to each system.
+
+\subsection*{Prerequisite courses/knowledge}
+
+\begin{itemize}
+\item SM7 Probability and Statistics for Network Analysis
+\item Topological Data Analysis and Persistent
+  Homology\footnote{\url{http://www.enseignement.polytechnique.fr/informatique/INF556/}}
+\end{itemize}
+
+\subsection*{Computing required?}
+
+Yes
+
+\subsection*{Data available?}
+
+Yes
+
+%%\nocite{*}
+% \bibliographystyle{ieeetr}
+% \bibliography{proposal}
+\printbibliography%
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

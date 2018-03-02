@@ -1,0 +1,86 @@
+\usepackage{fontspec}
+
+\setmainfont[Numbers=OldStyle]{Linux Libertine O}
+\setsansfont[Numbers=OldStyle]{Linux Biolinum O}
+\setmonofont[Scale=0.83]{Inconsolata}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+\usepackage{lipsum}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{lettrine}
+
+\usepackage{amssymb, amsmath}
+
+\usepackage{pdfpages}
+
+\usepackage{microtype}
+
+%% Propriétés du document PDF
+\usepackage[unicode,colorlinks=true]{hyperref}
+
+\hypersetup{
+  pdfauthor={Dimitri Lozeve},
+  pdftitle={Topological Data Analysis of time-dependent networks},
+  pdfsubject={MSc project proposal},
+  pdfkeywords={tda,network,project,msc},
+  pdfpagemode=UseOutlines,
+  % pdfpagelayout=TwoColumnRight,
+  linkcolor=MidnightBlue,
+  filecolor=MidnightBlue,
+  urlcolor=MidnightBlue,
+  citecolor=Green
+}
+
+%% Pour la classe memoir /!\
+
+%% Marges
+\setlrmarginsandblock{2.5cm}{3cm}{*}
+%\setulmarginsandblock{4cm}{4cm}{*}
+\checkandfixthelayout%
+
+%% Numérotation des divisions logiques
+\setsecnumdepth{subsection}
+\maxsecnumdepth{subsection}
+
+%% Profondeur de la ToC
+\settocdepth{subsection}
+\maxtocdepth{subsection}
+
+%% Style des titres des divisions logiques
+\setsecheadstyle{\Large\scshape}
+\setsubsecheadstyle{\large\scshape}
+
+%% Abstract
+\abstractintoc%
+\renewcommand{\abstractnamefont}{\normalfont\large\scshape}
+\renewcommand{\abstracttextfont}{\normalfont\normalsize}
+
+%% épigraphes
+\setlength{\epigraphwidth}{0.5\textwidth}
+\epigraphtextposition{flushleftright}
+
+%% Couleurs
+%\definecolor{purpletouch}{RGB}{103,30,117}
+\definecolor{bleux}{RGB}{0,62,92}
+
+\author{Dimitri Lozeve}
+\date{February 15, 2018}
+\title{MSc project proposal\\
+  \Large Topological Data Analysis of time-dependent networks}
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "proposal"
+%%% End:
+
