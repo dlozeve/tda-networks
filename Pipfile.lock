@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "433fe4f585fb489189f98fca98bf4cb140597c32e8a662b212bc3af15471c865"
+            "sha256": "3a67e54d8190ab442ef984eb4e0e4a28809e7131b1f41e6d865996b8c5926dff"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -9,9 +9,9 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.15.3-2-ARCH",
+            "platform_release": "4.15.6-1-ARCH",
             "platform_system": "Linux",
-            "platform_version": "#1 SMP PREEMPT Thu Feb 15 00:13:49 UTC 2018",
+            "platform_version": "#1 SMP PREEMPT Sun Feb 25 12:53:23 UTC 2018",
             "python_full_version": "3.6.4",
             "python_version": "3.6",
             "sys_platform": "linux"
@@ -27,6 +27,12 @@
         ]
     },
     "default": {
+        "altair": {
+            "hashes": [
+                "sha256:c1303f77f1ba4d632f2958c83c0f457b2b969860b1ac9adfb872aefa1780baa7"
+            ],
+            "version": "==1.2.1"
+        },
         "bleach": {
             "hashes": [
                 "sha256:cf567e7ed30ea5e05b31231d88ae170af1c5544758b9d7bebbc20590b7c30b1e",
@@ -144,10 +150,10 @@
         },
         "jupyterlab": {
             "hashes": [
-                "sha256:c5a140a76f5ed1c88e977372187c267817341a8dfc862807a45c4c72c6ab51bb",
-                "sha256:842914beca4d8a6fe62c45157b7f8fa44aaa570efdba7b19dab79605a51612e5"
+                "sha256:543f2f9a7f393d545ecf5a95a2290c97b88d78974a44b299b2bd387dc08b738e",
+                "sha256:96e01d709eda1e77eb4181b3109c8e0cf7ad7a69d0dfa2c42c94b5bcd65d220f"
             ],
-            "version": "==0.31.8"
+            "version": "==0.31.10"
         },
         "jupyterlab-launcher": {
             "hashes": [
@@ -308,6 +314,7 @@
                 "sha256:e8c43b5eee76b2083a9badde89fd1bbce6c8942d1045146e100b7b5e014f4f1a",
                 "sha256:e64193f0047ad603b71f202332ab5527c5e52aa7c8b609704fc28c0dc20c4365"
             ],
+            "markers": "os_name != 'nt'",
             "version": "==0.5.2"
         },
         "pygments": {
@@ -335,6 +342,10 @@
                 "sha256:891c38b2a02f5bb1be3e4793866c8df49c7d19baabf9c1bad62547e0b4866aca"
             ],
             "version": "==2.6.1"
+        },
+        "python-igraph": {
+            "git": "https://github.com/igraph/python-igraph.git",
+            "ref": "8864b46849b031a3013764d03e167222963c0f5d"
         },
         "pytz": {
             "hashes": [
@@ -435,6 +446,12 @@
                 "sha256:9c4bd2d267b7153df9152698efb1050a5d84982d3384a37b2c1f7723ba3e7835"
             ],
             "version": "==4.3.2"
+        },
+        "vega": {
+            "hashes": [
+                "sha256:b531938b7623c3804fc06a008bcf7559d06e04b485067840dd7181699d126922"
+            ],
+            "version": "==0.4.4"
         },
         "wcwidth": {
             "hashes": [

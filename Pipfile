@@ -13,7 +13,8 @@ matplotlib = "*"
 jupyter = "*"
 networkx = "*"
 jupyterlab = "*"
-
+altair = "*"
+python-igraph = {git = "https://github.com/igraph/python-igraph.git", ref="8864b46849b031a3013764d03e167222963c0f5d"}
 
 [dev-packages]
 
