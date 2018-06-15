@@ -14,5 +14,8 @@ altair = "*"
 python-igraph = "*"
 beakerx = "*"
 dionysus = "*"
+ipyparallel = "*"
+dask = {extras = ["complete"]}
+graphviz = "*"
 
 [dev-packages]
