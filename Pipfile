@@ -11,11 +11,12 @@ jupyter = "*"
 networkx = "*"
 jupyterlab = "*"
 altair = "*"
-python-igraph = "*"
 beakerx = "*"
 dionysus = "*"
 ipyparallel = "*"
 dask = {extras = ["complete"]}
 graphviz = "*"
+python-igraph = "*"
+scipy = "*"
 
 [dev-packages]
