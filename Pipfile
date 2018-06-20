@@ -18,5 +18,6 @@ dask = {extras = ["complete"]}
 graphviz = "*"
 python-igraph = "*"
 scipy = "*"
+bokeh = "*"
 
 [dev-packages]

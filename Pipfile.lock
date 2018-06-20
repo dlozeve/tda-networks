@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "04905b25977a46c41b3e183d1e487401f738bd23255701d94deb7bb5103f7d59"
+            "sha256": "db70af1fe6d663b960a39387d2e93074278d096aa9b52d0d489b3d44a52066e1"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -42,6 +42,13 @@
                 "sha256:eb7386f632349d10d9ce9d4a838b134d4731571851149f9cc2c05a9a837a9a44"
             ],
             "version": "==2.1.3"
+        },
+        "bokeh": {
+            "hashes": [
+                "sha256:de14151c7ef768f858f46168546c1d492cb04ab3c58bc118329a78ebf35b4688"
+            ],
+            "index": "pypi",
+            "version": "==0.12.16"
         },
         "click": {
             "hashes": [
@@ -374,6 +381,13 @@
             "index": "pypi",
             "version": "==1.14.5"
         },
+        "packaging": {
+            "hashes": [
+                "sha256:e9215d2d2535d3ae866c3d6efc77d5b24a0192cce0ff20e42896cc0664f889c0",
+                "sha256:f019b770dd64e585a99714f1fd5e01c7a8f11b45635aa953fd41c689a657375b"
+            ],
+            "version": "==17.1"
+        },
         "pandas": {
             "hashes": [
                 "sha256:211cfdb9f72f26d2ede21c751d27e08fed4434d47fb9bb82ebc8ff753888b8b6",
@@ -457,6 +471,7 @@
                 "sha256:e64193f0047ad603b71f202332ab5527c5e52aa7c8b609704fc28c0dc20c4365",
                 "sha256:e8c43b5eee76b2083a9badde89fd1bbce6c8942d1045146e100b7b5e014f4f1a"
             ],
+            "markers": "os_name != 'nt'",
             "version": "==0.5.2"
         },
         "py4j": {
