@@ -1,0 +1,88 @@
+\documentclass[a4paper,12pt]{article}
+%\usepackage declarations should go here
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{parskip}
+\usepackage{latexsym,amsmath,amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{zi4}
+\usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+%\usepackage{foundrysterlingbookosf}
+\begin{document}
+% Turn off page numbering until first section.
+\pagenumbering{gobble}
+
+% Title page - needs Stats_Logo.png
+\begin{titlepage}
+\begin{center}
+\vspace{1cm}
+\textsf{\Huge{University of Oxford \\}}
+\vspace{1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=.8]{Stats_Logo.png}
+\end{figure}
+\vspace{2.0cm}
+\Huge{Here is a very long title which should spread over two or more lines.\\}
+\vspace{2.0cm}
+\large{ by \\[14pt] Author \\[8pt] College} \\
+\vspace{2.2cm}
+\large{A dissertation submitted in partial fulfilment of the degree of Master of Science in Applied Statistics.
+} \\
+\vspace{.5cm}
+\large{\emph{Department of Statistics, 24--29 St Giles, \\Oxford, OX1 3LB}} \\
+\vspace{1.0cm}
+\large{Month Year} \\
+\end{center}
+\end{titlepage}
+\clearpage
+
+This is my own work (except where otherwise indicated)
+\vspace{2.5in}
+
+\begin{center}
+Candidate: Full Name\\
+\vspace{1.0in}
+Signed:.................................\\
+\vspace{1.0in}
+Date:...................................
+\end{center}
+\clearpage
+\begin{abstract}
+
+The abstract should go here.
+
+\end{abstract}
+\clearpage
+%\thispagestyle{empty}
+\vspace*{2in}
+\begin{center}
+\textbf{Acknowledgements}
+\end{center}
+
+I would like to thank the following:
+\clearpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
+\section{Introduction}
+
+\clearpage
+
+% If you have R code include it in an appendix.
+\section*{Appendix}
+\begin{verbatim}
+Put your R code here.
+\end{verbatim}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

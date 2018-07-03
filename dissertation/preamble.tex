@@ -1,0 +1,85 @@
+\usepackage{fontspec}
+
+\setmainfont[Numbers=OldStyle]{Linux Libertine O}
+\setsansfont[Numbers=OldStyle]{Linux Biolinum O}
+\setmonofont[Scale=0.83]{Inconsolata}
+
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=british]{english}
+
+\usepackage{lipsum}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{lettrine}
+
+\usepackage{amssymb, amsmath}
+
+\usepackage{pdfpages}
+
+\usepackage{microtype}
+
+%% Propriétés du document PDF
+\usepackage[unicode,colorlinks=true]{hyperref}
+
+\hypersetup{
+  pdfauthor={Dimitri Lozeve},
+  pdftitle={Topological Data Analysis of Temporal Networks},
+  pdfsubject={A dissertation submitted un partial fulfilment of the degree of Master of Science in Applied Statistics},
+  pdfkeywords={dissertation,stats,msc,tda,networks},
+  pdfpagemode=UseOutlines,
+  pdfpagelayout=TwoColumnRight,
+  linkcolor=MidnightBlue,
+  filecolor=MidnightBlue,
+  urlcolor=MidnightBlue,
+  citecolor=Green
+}
+
+%% Pour la classe memoir /!\
+
+%% Marges
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout%
+
+%% Numérotation des divisions logiques
+\setsecnumdepth{subsection}
+\maxsecnumdepth{subsection}
+
+%% Profondeur de la ToC
+\settocdepth{subsection}
+\maxtocdepth{subsection}
+
+%% Style des titres des divisions logiques
+\setsecheadstyle{\Large\scshape}
+\setsubsecheadstyle{\large\scshape}
+
+%% Abstract
+\abstractintoc%
+\renewcommand{\abstractnamefont}{\normalfont\large\scshape}
+\renewcommand{\abstracttextfont}{\normalfont\normalsize}
+
+%% épigraphes
+\setlength{\epigraphwidth}{0.5\textwidth}
+\epigraphtextposition{flushleftright}
+
+%% Couleurs
+%\definecolor{purpletouch}{RGB}{103,30,117}
+\definecolor{bleux}{RGB}{0,62,92}
+
+\author{Dimitri Lozeve}
+\date{September 2018}
+\title{Topological Data Analysis of Temporal Networks}
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "dissertation"
+%%% End:

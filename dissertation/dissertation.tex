@@ -1,0 +1,118 @@
+\documentclass[a4paper,11pt,openany,extrafontsizes]{memoir}
+
+\input{preamble}
+
+
+
+\begin{document}
+
+\pagestyle{plain}
+\tightlists%
+
+\begin{titlingpage}
+  \begin{center}
+    \vspace{1cm}
+    \textsf{\Huge{University of Oxford}}\\
+    \vspace{1cm}
+    \includegraphics[scale=.8]{Stats_Logo.png}\\
+    \vspace{2cm}
+    \Huge{\thetitle}\\
+    \vspace{2cm}
+    \large{by\\[14pt]\theauthor\\[8pt]St Catherine's College}\\
+    % \vspace{2.2cm}
+    \vfill
+    \large{A dissertation submitted in partial fulfilment of the degree of Master of Science in Applied Statistics}\\
+    \vspace{.5cm}
+    \large{\emph{Department of Statistics, 24--29 St Giles,\\Oxford, OX1 3LB}}\\
+    \vspace{1cm}
+    \large{\thedate}
+  \end{center}
+\end{titlingpage}
+
+%\chapterstyle{hangnum}
+%\chapterstyle{ell}
+%\chapterstyle{southall}
+\chapterstyle{wilsondob}
+
+\frontmatter
+
+\cleardoublepage%
+
+\chapter*{Declaration of authorship}
+
+\emph{This my own work (except where otherwise indicated).}\\[2cm]
+
+\begin{center}
+  Date \hspace{.5\linewidth} Signature
+\end{center}
+
+
+\cleardoublepage%
+
+\begin{abstract}
+  Abstract here
+\end{abstract}
+
+\cleardoublepage%
+
+\chapter*{Acknowledgements}%
+\label{cha:acknowledgements}
+
+Thank you!
+
+\cleardoublepage%
+
+\tableofcontents*
+\listoffigures*
+\listoftables*
+
+\clearpage
+
+\mainmatter%
+
+\chapter{Introduction}%
+\label{cha:introduction}
+
+
+
+\chapter{Topological Data Analysis and Persistent Homology}%
+\label{cha:tda-ph}
+
+\section{Simplicial Complexes}%
+\label{sec:simplicial-complexes}
+
+\section{Homology}%
+\label{sec:homology}
+
+\section{Filtrations}%
+\label{sec:filtrations}
+
+\section{Topological summaries: barcodes and persistence diagrams}%
+\label{sec:topol-summ}
+
+\section{Stability}%
+\label{sec:stability}
+
+
+
+\chapter{Temporal Networks}%
+\label{cha:temporal-networks}
+
+
+
+
+\backmatter%
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{}%
+\label{cha:bibliography}
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
