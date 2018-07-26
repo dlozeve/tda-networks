@@ -19,5 +19,8 @@ graphviz = "*"
 python-igraph = "*"
 scipy = "*"
 bokeh = "*"
+scikit-learn = "*"
+sklearn_tda = {git = "https://github.com/MathieuCarriere/sklearn_tda"}
+cython = "*"
 
 [dev-packages]

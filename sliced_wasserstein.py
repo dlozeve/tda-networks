@@ -33,4 +33,4 @@ def SW_approx(dgm1, dgm2, M):
         # l1-distance between the projections
         SW = SW + s * np.sum(np.abs(V1 - V2))
         theta = theta + s
-    return SW / M
+    return 1/np.pi * SW
