@@ -256,6 +256,125 @@ diagonal $\Delta$.
 
 \chapter{Temporal Networks}%
 \label{cha:temporal-networks}
+
+\section{Definition and basic properties}%
+\label{sec:defin-basic-prop}
+
+In this section, we will introduce the notion of temporal networks or
+graphs. This is a complex notion, with many concurrent definitions and
+interpretations. First, we restate the standard definition of a
+non-temporal, static graph.
+
+\begin{defn}[Graph]
+  A \emph{graph} is a couple $G = (V, E)$, where $V$ is a finite set
+  of \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is
+  a set of \emph{edges}. A \emph{weighted graph} is defined by
+  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is fcalled the
+  \emph{weight function}.
+\end{defn}
+
+We also define some basic concepts that will be needed later on to
+build simplicial complexes on graphs.
+
+\begin{defn}[Clique]
+  A \emph{clique} is a set of nodes where each pair is connected. That
+  is, a clique $C$ of a graph $G = (V,E)$ is a subset of $V$ such that
+  $\forall i,j\in C, i \neq j \implies (i,j)\in E$. A clique is said
+  to be \emph{maximal} if it cannot be augmented by any node.
+\end{defn}
+
+Temporal networks are defined in the more general framework of
+\emph{multilayer networks}. However, this definition is much too
+general for our simple applications, and we restrict ourselves to
+edge-centric time-varying graphs. In this model, the set of nodes is
+fixed and doesn't change over time, whereas edges can appear or
+disappear at different timestamps.
+
+\begin{defn}[Temporal network]
+  A \emph{temporal network} (or graph) is a tuple
+  $G = (V, E, \mathcal{T}, \rho)$, where:
+  \begin{itemize}
+  \item $V$ is a finite set of nodes,
+  \item $E\subseteq V\times V$ is a set of edges,
+  \item $\mathbb{T}$ is the \emph{temporal domain} (often taken as
+    $\mathbb{N}$ or $\mathbb{R}_+$), and
+    $\mathcal{T}\subseteq\mathbb{T}$ is the \emph{lifetime} of the
+    network,
+  \item $\rho: E\times\mathcal{T}\mapsto\{0,1\}$ is the \emph{presence
+      function}, which determines whether an edge is present in the
+    network at each timestamp.
+  \end{itemize}
+  The \emph{available dates} of an edge are the set
+  $\mathcal{I}(e) = \{t\in\mathcal{T}: \rho(e,t)=1\}$.
+\end{defn}
+
+Temporal networks can also have weighted edges. In this case, it is
+possible to have constant weights (edges can only appear or disappear
+over time, and always have the same weight), or time-varying
+weights. In the latter case, we can set the domain of the presence
+function to be $\mathbb{R}_+$ instead of $\{0,1\}$, where by
+convention a zero weight corresponds to an absent edge.
+
+\begin{defn}[Additive temporal network]
+  A temporal network is said to be \emph{additive} if for all $e\in E$
+  and $t\in\mathcal{T}$, if $\rho(e,t)=1$, then
+  $\forall t'>t, \rho(e, t') = 1$. Edges can only be added to the
+  network, never removed.
+\end{defn}
+
+\section{Network partitioning}%
+\label{sec:network-partitioning}
+
+\section{Persistent homology for networks}%
+\label{sec:pers-homol-netw}
+
+We now consider the problem of applying persistent homology to network
+data. An undirected network is already a simplicial complex of
+dimension 1. However, this will not be sufficient to capture enough
+topological information: we need to introduce higher-dimensional
+simplices. The first possible method is to project the network on a
+metric space, thus transforming the network data into a point cloud
+data. For this, we need to compute the distance between each pair of
+nodes in the network (via shortest path distance for instance). This
+also requires the network to be connected.
+
+Another usual method for weighted networks is called the \emph{weight
+  rank clique filtration} (WRCF), which filters the network based on
+weights. The procedure works as follows:
+\begin{enumerate}
+\item Set the set of all nodes, without any edge, as filtration
+  step~0.
+\item Rank all edge weights in decreasing order $\{w_1,\ldots,w_n\}$.
+\item At filtration step $t$, keep only the edges whose weights are
+  less than $w_t$, thus creating an unweighted graph.
+\item Define the maximal cliques of the resulting graph to be
+  simplices.
+\end{enumerate}
+
+At each step of the filtration, we construct a simplicial complex
+based on cliques: this is called a \emph{clique complex}. It is
+necessarily valid since a subset of a clique is necessarily a clique
+itself, and the same is true for the intersection of two cliques.
+
+This leads to a first possibility for applying persistent homology to
+temporal networks. It is possible to segment the lifetime of the
+network into sliding windows, creating a static graph on each window
+by retaining only the edges available during the time interval. We can
+then apply WRCF on each static graph in the sequence, obtaining a
+filtered complex for each window, to which we can then apply
+persistent homology.
+
+This method is sensitive to the choice of sliding windows on the time
+scale. The width and the overlap of the windows can completely change
+the networks created and their topological features. Too small a
+window, and the network becomes too small to have any significant
+topological properties, too large, and we lose important information
+in the evolution of the network over time.
+
+\section{Zigzag persistence}%
+\label{sec:zigzag-persistence}
+
+
 \backmatter%
 
 \nocite{*}
