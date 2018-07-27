@@ -138,6 +138,10 @@ structure of the metric space.
 
 %% TODO figure with examples of simplicial complexes
 
+The notion of simplicial complex is closely related to that of a
+hypergraph. The important distinction lies in the fact that a subset
+of a hyperedge is not necessarily a hyperedge itself.
+
 Using these definitions, we can define homology on simplicial
 complexes. %% TODO add reference for more details/do it myself?
 
@@ -363,6 +367,14 @@ by retaining only the edges available during the time interval. We can
 then apply WRCF on each static graph in the sequence, obtaining a
 filtered complex for each window, to which we can then apply
 persistent homology.
+
+This method can quickly become very computationally expensive, as
+finding all maximal cliques (using the Bron-Kerbosch algorithm for
+example) is a complicated problem in itself. In practice, we often
+restrict the search to cliques of dimension lower than a certain bound
+$d_M$. With this restriction, the new simplicial complex is
+homologically equivalent to the original: they have the same homology
+groups up to $H_{d_M-1}$.
 
 This method is sensitive to the choice of sliding windows on the time
 scale. The width and the overlap of the windows can completely change
