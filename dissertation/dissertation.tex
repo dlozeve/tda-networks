@@ -610,20 +610,68 @@ persistence diagrams and Banach spaces.
 \section{Vectorization methods}%
 \label{sec:vect-meth}
 
+%% TODO
+
 \subsection{Persistence landscapes}
+
+Persistence landscapes~\cite{bubenik_statistical_2015} are a mean to
+project the barcodes in a space where it will be possible to add them
+meaningfully. It would thus be possible to define means of persistence
+diagrams, along other summary statistics.
+
+As all the other vectorization techniques mentioned here, this
+approach is \emph{injective}, but not surjective, and no explicit
+inverse exists to go back from a persistence landscape to the
+corresponding persistence diagram. Moreover, a mean of persistence
+landscapes do not necessarily have a corresponding persistence
+diagram.
+
+\begin{defn}[Persistence landscape]
+  The persistence landscape of a diagram $D = \{(b_i,d_i)\}_{i=1}^n$
+  is the set of functions $\lambda_k: \mathbb{R} \mapsto \mathbb{R}$,
+  for $k\in\mathbb{N}$ such that
+  \[ \lambda_k(x) = k\text{-th largest value of } \{f_{(b_i,
+      d_i)}(x)\}_{i=1}^n, \] (or zero if the $k$-th largest value does
+  not exist), where $f_{(b,d)}$ is a piecewise linear function defined by:
+  \[ f_{(b,d)} =
+    \begin{cases}
+      0& \text{if }x \notin (b,d)\\
+      x-b& \text{if }x\in (b,\frac{b+d}{2})\\
+      -x+d& \text{if }x\in (\frac{b+d}{2},d).
+    \end{cases}
+  \]
+\end{defn}
+
+The persistence landscape is thus a kind of superposition of piecewise
+linear functions. Moreover, one can show that persistence landscapes
+are stable with respect to the $L^p$ distance, and that the
+Wasserstein and bottleneck distances are bounded by the $L^p$
+distance~\cite{bubenik_statistical_2015}. We can thus view the
+landscapes as elements of a Banach space in which we can perform the
+statistical computations.
 
 \subsection{Persistence images}
 
+\cite{adams_persistence_2017}
+
 \subsection{Tropical and arctic semirings}
+
+\cite{kalisnik_tropical_2018}
 
 \section{Kernel-based methods}%
 \label{sec:kernel-based-methods}
 
 \subsection{Persistent scale-space kernel}
 
+\cite{reininghaus_stable_2015,kwitt_statistical_2015}
+
 \subsection{Persistence weighted gaussian kernel}
 
+\cite{kusano_kernel_2017}
+
 \subsection{Sliced Wasserstein kernel}
+
+\cite{carriere_sliced_2017}
 
 \section{Comparison}%
 \label{sec:comparison}
