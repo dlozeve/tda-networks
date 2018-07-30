@@ -122,6 +122,54 @@ respectively).
   \emph{faces} of $\sigma$.
 \end{defn}
 
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{.3\linewidth}
+    \centering
+    \begin{tikzpicture}
+      \tikzstyle{point}=[circle,thick,draw=black,fill=blue!30,%
+      inner sep=0pt,minimum size=15pt]
+      \node (a)[point] at (0,0) {a};
+    \end{tikzpicture}
+    \caption{Single vertex}
+  \end{subfigure}%
+  % 
+  \begin{subfigure}[b]{.3\linewidth}
+    \centering
+    \begin{tikzpicture}
+      \tikzstyle{point}=[circle,thick,draw=black,fill=blue!30,%
+      inner sep=0pt,minimum size=15pt]
+      \node (a)[point] at (0,0) {a};
+      \node (b)[point] at (1.4,2) {b};
+      
+      \begin{scope}[on background layer]
+        \draw[fill=blue!15] (a.center) -- (b.center) -- cycle;
+      \end{scope}
+    \end{tikzpicture}
+    \caption{Segment}
+  \end{subfigure}%
+  % 
+  \begin{subfigure}[b]{.3\linewidth}
+    \centering
+    \begin{tikzpicture}
+      \tikzstyle{point}=[circle,thick,draw=black,fill=blue!30,%
+      inner sep=0pt,minimum size=15pt]
+      \node (a)[point] at (0,0) {a};
+      \node (b)[point] at (1.4,2) {b};
+      \node (c)[point] at (2.8,0) {c};
+      
+      \begin{scope}[on background layer]
+        \draw[fill=blue!15] (a.center) -- (b.center) -- (c.center) -- cycle;
+      \end{scope}
+    \end{tikzpicture}
+    \caption{Triangle}
+  \end{subfigure}%
+  % 
+  \caption{Examples of simplices}%
+  \label{fig:simplex}
+\end{figure}
+
+
 We then need a way to combine these basic building blocks meaningfully
 so that the resulting object can adequately reflect the topological
 structure of the metric space.
@@ -137,6 +185,48 @@ structure of the metric space.
 \end{defn}
 
 %% TODO figure with examples of simplicial complexes
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \tikzstyle{point}=[circle,thick,draw=black,fill=blue!30,%
+      inner sep=0pt,minimum size=10pt]
+      \node (a)[point] {};
+      \node (b)[point,above right=1.4cm and 1cm of a] {};
+      \node (c)[point,right=2cm of a] {};
+      \node (d)[point,above right=.4cm and 2cm of b] {};
+      \node (e)[point,above right=.4cm and 2cm of c] {};
+      \node (f)[point,below right=.7cm and 1.3cm of c] {};
+      \node (g)[point,right=2cm of d] {};
+      \node (h)[point,below right=.4cm and 1.5cm of e] {};
+      
+      \begin{scope}[on background layer]
+        \draw[fill=blue!15] (a.center) -- (b.center) -- (c.center) -- cycle;
+        \draw (b) -- (d) -- (g);
+        \draw (c.center) -- (e.center) -- (f.center) -- cycle;
+        \draw (d) -- (e) -- (h);
+      \end{scope}
+
+      \node (1)[point,right=2cm of g] {};
+      \node (2)[point,above right=.5cm and 1cm of 1] {};
+      \node (3)[point,below right=.5cm and 1cm of 2] {};
+      \node (4)[point,below left=1cm and .3cm of 3] {};
+      \node (5)[point,below right=1cm and .3cm of 1] {};
+      \node (6)[point,below left=1cm and .1cm of 5] {};
+      \node (7)[point,below right=1cm and .1cm of 4] {};
+      \node (8)[point,below right=.7cm and .7cm of 6] {};
+
+      \begin{scope}[on background layer]
+        \draw[fill=green!15] (1.center) -- (2.center) -- (3.center) -- (4.center) -- (5.center) -- cycle;
+        \draw (1) -- (4) -- (2) -- (5) -- (3) -- (1);
+        \draw[fill=blue!15] (6.center) -- (7.center) -- (8.center) -- cycle;
+        \draw (5) -- (6) -- (4) -- (7);
+      \end{scope}
+  \end{tikzpicture}
+  \caption{Example of a simplicial complex, with two connected
+    components, two 3-simplices, and one 5-simplex.}%
+  \label{fig:simplical-complex}
+\end{figure}
 
 The notion of simplicial complex is closely related to that of a
 hypergraph. The important distinction lies in the fact that a subset
