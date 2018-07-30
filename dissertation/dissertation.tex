@@ -75,11 +75,128 @@ Thank you!
 \label{cha:introduction}
 
 
+\chapter{Graphs and Temporal Networks}%
+\label{cha:temporal-networks}
+
+\section{Definition and basic properties}%
+\label{sec:defin-basic-prop}
+
+In this section, we will introduce the notion of temporal networks or
+graphs. This is a complex notion, with many concurrent definitions and
+interpretations. First, we restate the standard definition of a
+non-temporal, static graph.
+
+\begin{defn}[Graph]
+  A \emph{graph} is a couple $G = (V, E)$, where $V$ is a finite set
+  of \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is
+  a set of \emph{edges}. A \emph{weighted graph} is defined by
+  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is fcalled the
+  \emph{weight function}.
+\end{defn}
+
+We also define some basic concepts that will be needed later on to
+build simplicial complexes on graphs.
+
+\begin{defn}[Clique]
+  A \emph{clique} is a set of nodes where each pair is connected. That
+  is, a clique $C$ of a graph $G = (V,E)$ is a subset of $V$ such that
+  $\forall i,j\in C, i \neq j \implies (i,j)\in E$. A clique is said
+  to be \emph{maximal} if it cannot be augmented by any node.
+\end{defn}
+
+Temporal networks are defined in the more general framework of
+\emph{multilayer networks}~\cite{kivela_multilayer_2014}. However,
+this definition is much too general for our simple applications, and
+we restrict ourselves to edge-centric time-varying
+graphs~\cite{casteigts_time-varying_2012}. In this model, the set of
+nodes is fixed and doesn't change over time, whereas edges can appear
+or disappear at different timestamps.
+
+\begin{defn}[Temporal network]
+  A \emph{temporal network} (or graph) is a tuple
+  $G = (V, E, \mathcal{T}, \rho)$, where:
+  \begin{itemize}
+  \item $V$ is a finite set of nodes,
+  \item $E\subseteq V\times V$ is a set of edges,
+  \item $\mathbb{T}$ is the \emph{temporal domain} (often taken as
+    $\mathbb{N}$ or $\mathbb{R}_+$), and
+    $\mathcal{T}\subseteq\mathbb{T}$ is the \emph{lifetime} of the
+    network,
+  \item $\rho: E\times\mathcal{T}\mapsto\{0,1\}$ is the \emph{presence
+      function}, which determines whether an edge is present in the
+    network at each timestamp.
+  \end{itemize}
+  The \emph{available dates} of an edge are the set
+  $\mathcal{I}(e) = \{t\in\mathcal{T}: \rho(e,t)=1\}$.
+\end{defn}
+
+Temporal networks can also have weighted edges. In this case, it is
+possible to have constant weights (edges can only appear or disappear
+over time, and always have the same weight), or time-varying
+weights. In the latter case, we can set the domain of the presence
+function to be $\mathbb{R}_+$ instead of $\{0,1\}$, where by
+convention a zero weight corresponds to an absent edge.
+
+\begin{defn}[Additive temporal network]
+  A temporal network is said to be \emph{additive} if for all $e\in E$
+  and $t\in\mathcal{T}$, if $\rho(e,t)=1$, then
+  $\forall t'>t, \rho(e, t') = 1$. Edges can only be added to the
+  network, never removed.
+\end{defn}
+
+\section{Examples of applications}%
+\label{sec:exampl-appl}
+
+\section{Network partitioning}%
+\label{sec:network-partitioning}
+
+Temporal networks are a very active research subject, leading to
+multiple interesting problems. The additional time dimension adds a
+significant layer of complexity that cannot be adequately treated by
+the common methods on static graphs.
+
+Moreover, data collection can lead to large amount of noise in
+datasets. Combined with large dataset sized due to the huge number of
+data points for each node in the network, temporal graphs cannot be
+studied effectively in their raw form. Recent advances have been made
+to fit network models to rich but noisy
+data~\cite{newman_network_2018}, generally using some variation on the
+expectation-maximization (EM) algorithm.
+
+One solution that has been proposed to study such temporal data has
+been to \emph{partition} the time scale of the network into a sequence
+of smaller, static graphs, representing all the interactions during a
+short interval of time. The approach consists in subdividing the
+lifetime of the network in \emph{sliding windows} of a given length.
+We can then ``flatten'' the temporal network on each time interval,
+keeping all the edges that appear at least once (or adding their
+weights in the case of weighted networks).
+
+This partitioning is sensitive to two parameters: the length of each
+time interval, and their overlap. Of those, the former is the most
+important: it will define the \emph{resolution} of the study. If it is
+too small, too much noise will be taken into account; if it is too
+large, we will lose important information. There is a need to find a
+compromise, which will depend on the application and on the task
+performed on the network. In the case of a classification task to
+determine periodicity, it will be useful to adapt the resolution to
+the expected period: if we expect week-long periodicity, a resolution
+of one day seems reasonable.
+
+Once the network is partitioned, we can apply any statistical learning
+task on the sequence of static graphs. In this study, we will focus on
+classification of time steps. This can be used to detect periodicity,
+outliers, or even maximise temporal communities.
+
+%% TODO Talk about partitioning methods?
 
 \chapter{Topological Data Analysis and Persistent Homology}%
 \label{cha:tda-ph}
 
-\section{Homology}%
+\section{Basic constructions}
+\label{sec:basic-constructions}
+
+\subsection{Homology}%
 \label{sec:homology}
 
 Our goal is to understand the topological structure of a metric
@@ -98,7 +215,7 @@ space can be extremely difficult. It is necessary to approximate it in
 a structure that would be both combinatorial and topological in
 nature.
 
-\section{Simplicial Complexes}%
+\subsection{Simplicial Complexes}%
 \label{sec:simplicial-complexes}
 
 In order to understand the topological structure of a metric space, we
@@ -235,7 +352,7 @@ of a hyperedge is not necessarily a hyperedge itself.
 Using these definitions, we can define homology on simplicial
 complexes. %% TODO add reference for more details/do it myself?
 
-\section{Filtrations}%
+\subsection{Filtrations}%
 \label{sec:filtrations}
 
 If we consider that a simplicial complex is a kind of
@@ -307,7 +424,7 @@ space.
 
 \begin{defn}[Persistence diagrams]
   A \emph{persistence diagram} is the union of a finite multiset of
-  points in $\bar{\mathbb{R}}^2$ zith the diagonal
+  points in $\overline{\mathbb{R}}^2$ zith the diagonal
   $\Delta = \{(x,x) \;|\; x\in\mathbb{R}^2\}$, where every point of
   $\Delta$ has infinite multiplicity.
 \end{defn}
@@ -347,122 +464,12 @@ diagonal $\Delta$.
 \section{Stability}%
 \label{sec:stability}
 
+\section{Algorithms and implementations}%
+\label{sec:algor-impl}
 
 
-\chapter{Temporal Networks}%
-\label{cha:temporal-networks}
-
-\section{Definition and basic properties}%
-\label{sec:defin-basic-prop}
-
-In this section, we will introduce the notion of temporal networks or
-graphs. This is a complex notion, with many concurrent definitions and
-interpretations. First, we restate the standard definition of a
-non-temporal, static graph.
-
-\begin{defn}[Graph]
-  A \emph{graph} is a couple $G = (V, E)$, where $V$ is a finite set
-  of \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is
-  a set of \emph{edges}. A \emph{weighted graph} is defined by
-  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is fcalled the
-  \emph{weight function}.
-\end{defn}
-
-We also define some basic concepts that will be needed later on to
-build simplicial complexes on graphs.
-
-\begin{defn}[Clique]
-  A \emph{clique} is a set of nodes where each pair is connected. That
-  is, a clique $C$ of a graph $G = (V,E)$ is a subset of $V$ such that
-  $\forall i,j\in C, i \neq j \implies (i,j)\in E$. A clique is said
-  to be \emph{maximal} if it cannot be augmented by any node.
-\end{defn}
-
-Temporal networks are defined in the more general framework of
-\emph{multilayer networks}~\cite{kivela_multilayer_2014}. However,
-this definition is much too general for our simple applications, and
-we restrict ourselves to edge-centric time-varying
-graphs~\cite{casteigts_time-varying_2012}. In this model, the set of
-nodes is fixed and doesn't change over time, whereas edges can appear
-or disappear at different timestamps.
-
-\begin{defn}[Temporal network]
-  A \emph{temporal network} (or graph) is a tuple
-  $G = (V, E, \mathcal{T}, \rho)$, where:
-  \begin{itemize}
-  \item $V$ is a finite set of nodes,
-  \item $E\subseteq V\times V$ is a set of edges,
-  \item $\mathbb{T}$ is the \emph{temporal domain} (often taken as
-    $\mathbb{N}$ or $\mathbb{R}_+$), and
-    $\mathcal{T}\subseteq\mathbb{T}$ is the \emph{lifetime} of the
-    network,
-  \item $\rho: E\times\mathcal{T}\mapsto\{0,1\}$ is the \emph{presence
-      function}, which determines whether an edge is present in the
-    network at each timestamp.
-  \end{itemize}
-  The \emph{available dates} of an edge are the set
-  $\mathcal{I}(e) = \{t\in\mathcal{T}: \rho(e,t)=1\}$.
-\end{defn}
-
-Temporal networks can also have weighted edges. In this case, it is
-possible to have constant weights (edges can only appear or disappear
-over time, and always have the same weight), or time-varying
-weights. In the latter case, we can set the domain of the presence
-function to be $\mathbb{R}_+$ instead of $\{0,1\}$, where by
-convention a zero weight corresponds to an absent edge.
-
-\begin{defn}[Additive temporal network]
-  A temporal network is said to be \emph{additive} if for all $e\in E$
-  and $t\in\mathcal{T}$, if $\rho(e,t)=1$, then
-  $\forall t'>t, \rho(e, t') = 1$. Edges can only be added to the
-  network, never removed.
-\end{defn}
-
-\section{Examples of applications}%
-\label{sec:exampl-appl}
-
-\section{Network partitioning}%
-\label{sec:network-partitioning}
-
-Temporal networks are a very active research subject, leading to
-multiple interesting problems. The additional time dimension adds a
-significant layer of complexity that cannot be adequately treated by
-the common methods on static graphs.
-
-Moreover, data collection can lead to large amount of noise in
-datasets. Combined with large dataset sized due to the huge number of
-data points for each node in the network, temporal graphs cannot be
-studied effectively in their raw form. Recent advances have been made
-to fit network models to rich but noisy
-data~\cite{newman_network_2018}, generally using some variation on the
-expectation-maximization (EM) algorithm.
-
-One solution that has been proposed to study such temporal data has
-been to \emph{partition} the time scale of the network into a sequence
-of smaller, static graphs, representing all the interactions during a
-short interval of time. The approach consists in subdividing the
-lifetime of the network in \emph{sliding windows} of a given length.
-We can then ``flatten'' the temporal network on each time interval,
-keeping all the edges that appear at least once (or adding their
-weights in the case of weighted networks).
-
-This partitioning is sensitive to two parameters: the length of each
-time interval, and their overlap. Of those, the former is the most
-important: it will define the \emph{resolution} of the study. If it is
-too small, too much noise will be taken into account; if it is too
-large, we will lose important information. There is a need to find a
-compromise, which will depend on the application and on the task
-performed on the network. In the case of a classification task to
-determine periodicity, it will be useful to adapt the resolution to
-the expected period: if we expect week-long periodicity, a resolution
-of one day seems reasonable.
-
-Once the network is partitioned, we can apply any statistical learning
-task on the sequence of static graphs. In this study, we will focus on
-classification of time steps. This can be used to detect periodicity,
-outliers, or even maximise temporal communities.
-
-%% TODO Talk about partitioning methods?
+\chapter{Topological Data Analysis on Networks}%
+\label{cha:topol-data-analys}
 
 \section{Persistent homology for networks}%
 \label{sec:pers-homol-netw}
