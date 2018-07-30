@@ -90,7 +90,7 @@ non-temporal, static graph.
   A \emph{graph} is a couple $G = (V, E)$, where $V$ is a finite set
   of \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is
   a set of \emph{edges}. A \emph{weighted graph} is defined by
-  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is fcalled the
+  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is called the
   \emph{weight function}.
 \end{defn}
 
@@ -146,6 +146,8 @@ convention a zero weight corresponds to an absent edge.
 
 \section{Examples of applications}%
 \label{sec:exampl-appl}
+
+%% TODO
 
 \section{Network partitioning}%
 \label{sec:network-partitioning}
@@ -224,9 +226,9 @@ conserve the overall organisation of the space. For this, we use a
 structure called a \emph{simplicial complex}, which is a kind of
 higher-dimensional generalization of graphs.
 
-The building blocks of this representation will be \emph{simplices},
+The building blocks of this representation will be \emph{simplexes},
 which are simply the convex hull of an arbitrary set of
-points. Examples of simplices include single points, segments,
+points. Examples of simplexes include single points, segments,
 triangles, and tetrahedrons (in dimensions 0, 1,, 2, and 3
 respectively).
 
@@ -234,7 +236,7 @@ respectively).
   The \emph{$k$-dimensional simplex} $\sigma = [x_0,\ldots,x_k]$ is
   the convex hull of the set $\{x_0,\ldots,x_k\} \in \mathbb{R}^d$,
   where $x_0,\ldots,x_k$ are affinely independent. $x_0,\ldots,x_k$
-  are called the \emph{vertices} of $\sigma$, and the simplices
+  are called the \emph{vertices} of $\sigma$, and the simplexes
   defined by the subsets of $\{x_0,\ldots,x_k\}$ are called the
   \emph{faces} of $\sigma$.
 \end{defn}
@@ -282,7 +284,7 @@ respectively).
     \caption{Triangle}
   \end{subfigure}%
   % 
-  \caption{Examples of simplices}%
+  \caption{Examples of simplexes}%
   \label{fig:simplex}
 \end{figure}
 
@@ -292,11 +294,11 @@ so that the resulting object can adequately reflect the topological
 structure of the metric space.
 
 \begin{defn}[Simplicial complex]
-  A \emph{simplicial complex} is a collection $K$ of simplices such
+  A \emph{simplicial complex} is a collection $K$ of simplexes such
   that:
   \begin{itemize}
   \item any face of a simplex of $K$ is a simplex of $K$
-  \item the intersection of two simplices of $K$ is either the empty
+  \item the intersection of two simplexes of $K$ is either the empty
     set or a common face or both.
   \end{itemize}
 \end{defn}
@@ -339,7 +341,7 @@ structure of the metric space.
       \end{scope}
   \end{tikzpicture}
   \caption{Example of a simplicial complex, with two connected
-    components, two 3-simplices, and one 5-simplex.}%
+    components, two 3-simplexes, and one 5-simplex.}%
   \label{fig:simplical-complex}
 \end{figure}
 
@@ -364,7 +366,7 @@ important smaller features.
 %% TODO rewrite using the Cech filtration as an example?
 
 The ideal solution to these problems is to consider all scales at
-once: this is the objective of \emph{filtered simplical complexes}.
+once: this is the objective of \emph{filtered simplicial complexes}.
 
 \begin{defn}[Filtration]
   A \emph{filtered simplicial complex}, or simply a \emph{filtration},
@@ -411,7 +413,7 @@ construction is called a \emph{barcode}.
 
 In order to interpret the results of the persistent homology
 computation, we need to compare the output for a particular data set
-to a suitable null model. For this, we need some kind of a similarity
+to a suitable null model. For this, we need some kind of similarity
 measure between barcodes and a way to evaluate the statistical
 significance of the results.
 
@@ -498,11 +500,11 @@ We now consider the problem of applying persistent homology to network
 data. An undirected network is already a simplicial complex of
 dimension 1. However, this will not be sufficient to capture enough
 topological information: we need to introduce higher-dimensional
-simplices. The first possible method is to project the network on a
+simplexes. The first possible method is to project the network on a
 metric space~\cite{otter_roadmap_2017}, thus transforming the network
 data into a point cloud data. For this, we need to compute the
-distance between each pair of nodes in the network (via shortest path
-distance for instance). This also requires the network to be
+distance between each pair of nodes in the network (with the shortest
+path distance for instance). This also requires the network to be
 connected.
 
 Another usual method for weighted networks is called the \emph{weight
@@ -515,7 +517,7 @@ filters the network based on weights. The procedure works as follows:
 \item At filtration step $t$, keep only the edges whose weights are
   less than $w_t$, thus creating an unweighted graph.
 \item Define the maximal cliques of the resulting graph to be
-  simplices.
+  simplexes.
 \end{enumerate}
 
 At each step of the filtration, we construct a simplicial complex
@@ -573,7 +575,7 @@ compute persistence on alternating nested sequences:
 
 This sequence can in turn be computed from a temporal network by
 computing the union of each pair of consecutive time steps,
-constructing a alternating sequence.
+constructing an alternating sequence.
 
 Zigzag persistence is a special case of the more general concept of
 \emph{multi-parameter
@@ -665,7 +667,7 @@ statistical computations.
 
 \cite{reininghaus_stable_2015,kwitt_statistical_2015}
 
-\subsection{Persistence weighted gaussian kernel}
+\subsection{Persistence weighted Gaussian kernel}
 
 \cite{kusano_kernel_2017}
 
