@@ -530,12 +530,60 @@ in the evolution of the network over time.
 \label{sec:zigzag-persistence}
 
 
+
+\chapter{Persistent Homology for Machine Learning applications}%
+\label{cha:pers-homol-mach}
+
+The output of persistent homology is not directly usable by most
+statistical methods. Barcodes and persistence diagrams, being a
+multiset of points in $\overline{\mathbb{R}}^2$, are not elements of a
+metric space in which we could perform statistical computations.
+
+The distances between persistence diagrams defined
+in~\autoref{sec:topol-summ} allow us to compare different
+outputs. From a statistical perspective, it is possible to use a
+generative model of simplicial complexes, and use a distance between
+persistence diagrams to measure the similarity of our observations
+with this null model~\cite{adler_persistent_2010}. This would
+effectively define a metric space of persistence diagrams. It is even
+possible to define some statistical summaries (means, medians,
+confidence intervals) on these
+spaces~\cite{turner_frechet_2014,munch_probabilistic_2015}.
+
+The issue with this approach is that metric spaces do not offer enough
+algebraic structure to be amenable to most machine learning
+techniques. One of the most recent development in the study of
+topological summaries has been to find mappings between the space of
+persistence diagrams and Banach spaces.
+
+\section{Vectorization methods}%
+\label{sec:vect-meth}
+
+\subsection{Persistence landscapes}
+
+\subsection{Persistence images}
+
+\subsection{Tropical and arctic semirings}
+
+\section{Kernel-based methods}%
+\label{sec:kernel-based-methods}
+
+\subsection{Persistent scale-space kernel}
+
+\subsection{Persistence weighted gaussian kernel}
+
+\subsection{Sliced Wasserstein kernel}
+
+\section{Comparison}%
+\label{sec:comparison}
+
+
+
+
 \backmatter%
 
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{}%
-\label{cha:bibliography}
+% \nocite{*}
+\printbibliography%
 
 \end{document}
 
