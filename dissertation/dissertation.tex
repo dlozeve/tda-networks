@@ -193,7 +193,7 @@ outliers, or even maximise temporal communities.
 \chapter{Topological Data Analysis and Persistent Homology}%
 \label{cha:tda-ph}
 
-\section{Basic constructions}
+\section{Basic constructions}%
 \label{sec:basic-constructions}
 
 \subsection{Homology}%
@@ -300,8 +300,6 @@ structure of the metric space.
     set or a common face or both.
   \end{itemize}
 \end{defn}
-
-%% TODO figure with examples of simplicial complexes
 
 \begin{figure}[ht]
   \centering
@@ -529,7 +527,37 @@ in the evolution of the network over time.
 \section{Zigzag persistence}%
 \label{sec:zigzag-persistence}
 
+The standard algorithm to compute persistent homology
+(\autoref{sec:persistent-homology}) only works for filtrations which
+are nested sequences of simplicial complexes:
+\[ \cdots \subseteq K_{i-1} \subseteq K_i \subseteq K_{i+1} \subseteq
+  \cdots \]
 
+When studying temporal networks, we have two possibilities:
+\begin{itemize}
+\item Create an independent filtration (e.g.\ WRCF) from each time
+  step. The issue is that the topological features will be completely
+  disconnected from the time dimension.
+\item Create a filtration along the time dimension. The issue in this
+  case is that the sequence is no longer nested (except for additive
+  temporal networks, ie when edges are never deleted).
+\end{itemize}
+
+The solution to consider the time dimension is provided by
+\emph{zigzag persistence}~\cite{carlsson_zigzag_2009}, which allows to
+compute persistence on alternating nested sequences:
+\[ \cdots \supseteq K_{i-1} \subseteq K_i \supseteq K_{i+1} \subseteq
+  \cdots \]
+
+This sequence can in turn be computed from a temporal network by
+computing the union of each pair of consecutive time steps,
+constructing a alternating sequence.
+
+Zigzag persistence is a special case of the more general concept of
+\emph{multi-parameter persistence}~\cite{carlsson_theory_2009}, where
+filtrations can span across multiple parameters.
+
+%% Note about libraries implementing zigzag persistence: Dionysus
 
 \chapter{Persistent Homology for Machine Learning applications}%
 \label{cha:pers-homol-mach}
