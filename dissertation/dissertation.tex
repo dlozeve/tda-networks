@@ -416,8 +416,51 @@ convention a zero weight corresponds to an absent edge.
   network, never removed.
 \end{defn}
 
+\section{Examples of applications}%
+\label{sec:exampl-appl}
+
 \section{Network partitioning}%
 \label{sec:network-partitioning}
+
+Temporal networks are a very active research subject, leading to
+multiple interesting problems. The additional time dimension adds a
+significant layer of complexity that cannot be adequately treated by
+the common methods on static graphs.
+
+Moreover, data collection can lead to large amount of noise in
+datasets. Combined with large dataset sized due to the huge number of
+data points for each node in the network, temporal graphs cannot be
+studied effectively in their raw form. Recent advances have been made
+to fit network models to rich but noisy
+data~\cite{newman_network_2018}, generally using some variation on the
+expectation-maximization (EM) algorithm.
+
+One solution that has been proposed to study such temporal data has
+been to \emph{partition} the time scale of the network into a sequence
+of smaller, static graphs, representing all the interactions during a
+short interval of time. The approach consists in subdividing the
+lifetime of the network in \emph{sliding windows} of a given length.
+We can then ``flatten'' the temporal network on each time interval,
+keeping all the edges that appear at least once (or adding their
+weights in the case of weighted networks).
+
+This partitioning is sensitive to two parameters: the length of each
+time interval, and their overlap. Of those, the former is the most
+important: it will define the \emph{resolution} of the study. If it is
+too small, too much noise will be taken into account; if it is too
+large, we will lose important information. There is a need to find a
+compromise, which will depend on the application and on the task
+performed on the network. In the case of a classification task to
+determine periodicity, it will be useful to adapt the resolution to
+the expected period: if we expect week-long periodicity, a resolution
+of one day seems reasonable.
+
+Once the network is partitioned, we can apply any statistical learning
+task on the sequence of static graphs. In this study, we will focus on
+classification of time steps. This can be used to detect periodicity,
+outliers, or even maximise temporal communities.
+
+%% TODO Talk about partitioning methods?
 
 \section{Persistent homology for networks}%
 \label{sec:pers-homol-netw}
