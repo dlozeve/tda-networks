@@ -462,9 +462,31 @@ diagonal $\Delta$.
 \section{Stability}%
 \label{sec:stability}
 
+One of the most important aspects of Topological Data Analysis is that
+it is \emph{stable} with respect to small perturbations in the
+data. In fact, the persistence diagram operator is Lipschitz with
+respect to the bottleneck distance. First, we define a distance
+between subsets of a metric space.
+
+\begin{defn}[Hausdorff distance]
+  Let $X$ and $Y$ be subsets of a metric space $(E, d)$. The
+  \emph{Hausdorff distance} is defined by
+  \[ d_H(X,Y) = \max \left[ \sup_{x\in X} \inf_{y\in Y} d(x,y),
+      \sup_{y\in Y} \inf_{x\in X} d(x,y) \right]. \]
+\end{defn}
+
+We can now give the proper stability property.
+
+\begin{prop}
+  Let $X$ and $Y$ be subsets in a metric space. We have
+  \[ d_B(\dgm(X),\dgm(Y)) \leq d_H(X,Y). \]
+\end{prop}
+
 \section{Algorithms and implementations}%
 \label{sec:algor-impl}
 
+%% TODO
+\cite{morozov_dionysus:_2018,bauer_ripser:_2018,reininghaus_dipha_2018,maria_gudhi_2014}
 
 \chapter{Topological Data Analysis on Networks}%
 \label{cha:topol-data-analys}
@@ -554,7 +576,8 @@ computing the union of each pair of consecutive time steps,
 constructing a alternating sequence.
 
 Zigzag persistence is a special case of the more general concept of
-\emph{multi-parameter persistence}~\cite{carlsson_theory_2009}, where
+\emph{multi-parameter
+  persistence}~\cite{carlsson_theory_2009,dey_computing_2014}, where
 filtrations can span across multiple parameters.
 
 %% Note about libraries implementing zigzag persistence: Dionysus
