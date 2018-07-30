@@ -265,9 +265,10 @@ once: this is the objective of \emph{filtered simplical complexes}.
 \label{sec:persistent-homology}
 
 We can now compute the homology for each step in a filtration. This
-leads to the notion of \emph{persistent homology}, which gives us all
-the information necessary to establish the topological structure of
-the metric space at multiple scales.
+leads to the notion of \emph{persistent
+  homology}~\cite{carlsson_topology_2009,zomorodian_computing_2005},
+which gives us all the information necessary to establish the
+topological structure of the metric space at multiple scales.
 
 \begin{defn}[Persistent homology]
   The \emph{$p$-th persistent homology} of a simplicial complex
@@ -378,11 +379,12 @@ build simplicial complexes on graphs.
 \end{defn}
 
 Temporal networks are defined in the more general framework of
-\emph{multilayer networks}. However, this definition is much too
-general for our simple applications, and we restrict ourselves to
-edge-centric time-varying graphs. In this model, the set of nodes is
-fixed and doesn't change over time, whereas edges can appear or
-disappear at different timestamps.
+\emph{multilayer networks}~\cite{kivela_multilayer_2014}. However,
+this definition is much too general for our simple applications, and
+we restrict ourselves to edge-centric time-varying
+graphs~\cite{casteigts_time-varying_2012}. In this model, the set of
+nodes is fixed and doesn't change over time, whereas edges can appear
+or disappear at different timestamps.
 
 \begin{defn}[Temporal network]
   A \emph{temporal network} (or graph) is a tuple
@@ -470,14 +472,15 @@ data. An undirected network is already a simplicial complex of
 dimension 1. However, this will not be sufficient to capture enough
 topological information: we need to introduce higher-dimensional
 simplices. The first possible method is to project the network on a
-metric space, thus transforming the network data into a point cloud
-data. For this, we need to compute the distance between each pair of
-nodes in the network (via shortest path distance for instance). This
-also requires the network to be connected.
+metric space~\cite{otter_roadmap_2017}, thus transforming the network
+data into a point cloud data. For this, we need to compute the
+distance between each pair of nodes in the network (via shortest path
+distance for instance). This also requires the network to be
+connected.
 
 Another usual method for weighted networks is called the \emph{weight
-  rank clique filtration} (WRCF), which filters the network based on
-weights. The procedure works as follows:
+  rank clique filtration} (WRCF)~\cite{petri_topological_2013}, which
+filters the network based on weights. The procedure works as follows:
 \begin{enumerate}
 \item Set the set of all nodes, without any edge, as filtration
   step~0.
