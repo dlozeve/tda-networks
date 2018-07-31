@@ -1,7 +1,7 @@
 \usepackage{fontspec}
 
-\setmainfont[Numbers=OldStyle]{Linux Libertine O}
-\setsansfont[Numbers=OldStyle]{Linux Biolinum O}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
 \setmonofont[Scale=0.83]{Inconsolata}
 
 \usepackage{polyglossia}
@@ -18,12 +18,18 @@
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
+\newcommand{\thmautorefname}{theorem}
 \newtheorem{lem}[thm]{Lemma}
+\newcommand{\lemautorefname}{lemma}
 \newtheorem{cor}[thm]{Corollary}
+\newcommand{\corautorefname}{corollary}
 \newtheorem{prop}[thm]{Proposition}
+\newcommand{\propautorefname}{proposition}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[chapter]
+\newcommand{\defnautorefname}{definition}
 \newtheorem{expl}{Example}[chapter]
+\newcommand{\explautorefname}{example}
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -33,7 +39,7 @@
 
 \usepackage{tikz-network}
 \usepackage{tikz}
-\usetikzlibrary{patterns,backgrounds,positioning}
+\usetikzlibrary{patterns,backgrounds,positioning,chains}
 
 \usepackage[style=numeric-comp,backref,url=false]{biblatex}
 \bibliography{TDA,temporalgraphs}

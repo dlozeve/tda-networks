@@ -63,9 +63,9 @@ Thank you!
 
 \cleardoublepage%
 
-\tableofcontents*
-\listoffigures*
-\listoftables*
+\tableofcontents
+\listoffigures
+% \listoftables
 
 \clearpage
 
@@ -81,52 +81,70 @@ Thank you!
 \section{Definition and basic properties}%
 \label{sec:defin-basic-prop}
 
-In this section, we will introduce the notion of temporal networks or
-graphs. This is a complex notion, with many concurrent definitions and
-interpretations. First, we restate the standard definition of a
-non-temporal, static graph.
+In this section, we introduce the notion of temporal networks (or
+temporal graphs). This is a complex notion, with many concurrent
+definitions and interpretations.
+
+After clarifying the notations, we restate the standard definition of
+a non-temporal graph.
+
+\begin{notation}
+  \begin{itemize}
+  \item $\mathbb{N}$ is the set of non-negative natural numbers
+    $0,1,2,\ldots$ 
+  \item $\mathbb{N}^*$ is the set of positive integers $1,2,\ldots$
+  \item $\mathbb{R}$ is the set of real numbers.
+    $\mathbb{R}_+ = \{x\in\mathbb{R} \;|\; x\geq 0\}$, and
+    $\mathbb{R}_+^* = \{x\in\mathbb{R} \;|\; x>0\}$.
+\end{itemize}
+\end{notation}
 
 \begin{defn}[Graph]
-  A \emph{graph} is a couple $G = (V, E)$, where $V$ is a finite set
-  of \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is
-  a set of \emph{edges}. A \emph{weighted graph} is defined by
-  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+$ is called the
+  A \emph{graph} is a couple $G = (V, E)$, where $V$ is a set of
+  \emph{nodes} (or \emph{vertices}), and $E \subseteq V\times V$ is a
+  set of \emph{edges}. A \emph{weighted graph} is defined by
+  $G = (V, E, w)$, where $w : E\mapsto \mathbb{R}_+^*$ is called the
   \emph{weight function}.
 \end{defn}
 
-We also define some basic concepts that will be needed later on to
-build simplicial complexes on graphs.
+We also define some basic concepts that we will need later to build
+simplicial complexes on graphs.
 
 \begin{defn}[Clique]
-  A \emph{clique} is a set of nodes where each pair is connected. That
+  A \emph{clique} is a set of nodes where each pair is adjacent. That
   is, a clique $C$ of a graph $G = (V,E)$ is a subset of $V$ such that
-  $\forall i,j\in C, i \neq j \implies (i,j)\in E$. A clique is said
-  to be \emph{maximal} if it cannot be augmented by any node.
+  for all $i,j\in C, i \neq j \implies (i,j)\in E$. A clique is said
+  to be \emph{maximal} if it cannot be augmented by any node, such
+  that the resulting set of nodes is itself a clique.
 \end{defn}
 
-Temporal networks are defined in the more general framework of
+Temporal networks can be defined in the more general framework of
 \emph{multilayer networks}~\cite{kivela_multilayer_2014}. However,
 this definition is much too general for our simple applications, and
 we restrict ourselves to edge-centric time-varying
 graphs~\cite{casteigts_time-varying_2012}. In this model, the set of
-nodes is fixed and doesn't change over time, whereas edges can appear
-or disappear at different timestamps.
+nodes is fixed, but edges can appear or disappear at different times.
+
+In this study, we restrict ourselves to discrete time stamps. Each
+interaction is taken to be instantaneous.
+%% TODO note about data collection, oversampling,
+%% duration of interactions
 
 \begin{defn}[Temporal network]
-  A \emph{temporal network} (or graph) is a tuple
+  A \emph{temporal network} is a tuple
   $G = (V, E, \mathcal{T}, \rho)$, where:
   \begin{itemize}
-  \item $V$ is a finite set of nodes,
+  \item $V$ is a set of nodes,
   \item $E\subseteq V\times V$ is a set of edges,
   \item $\mathbb{T}$ is the \emph{temporal domain} (often taken as
-    $\mathbb{N}$ or $\mathbb{R}_+$), and
+    $\mathbb{N}$ or any other countable set), and
     $\mathcal{T}\subseteq\mathbb{T}$ is the \emph{lifetime} of the
     network,
   \item $\rho: E\times\mathcal{T}\mapsto\{0,1\}$ is the \emph{presence
       function}, which determines whether an edge is present in the
-    network at each timestamp.
+    network at each time stamp.
   \end{itemize}
-  The \emph{available dates} of an edge are the set
+  The \emph{available times} of an edge are the set
   $\mathcal{I}(e) = \{t\in\mathcal{T}: \rho(e,t)=1\}$.
 \end{defn}
 
@@ -135,13 +153,19 @@ possible to have constant weights (edges can only appear or disappear
 over time, and always have the same weight), or time-varying
 weights. In the latter case, we can set the domain of the presence
 function to be $\mathbb{R}_+$ instead of $\{0,1\}$, where by
-convention a zero weight corresponds to an absent edge.
+convention a 0 weight corresponds to an absent edge.
 
-\begin{defn}[Additive temporal network]
+\begin{defn}[Additive and dismantling temporal
+  networks]\label{defn:additive}
   A temporal network is said to be \emph{additive} if for all $e\in E$
-  and $t\in\mathcal{T}$, if $\rho(e,t)=1$, then
-  $\forall t'>t, \rho(e, t') = 1$. Edges can only be added to the
-  network, never removed.
+  and $t\in\mathcal{T}$, if $\rho(e,t)=1$, then for all
+  $t'>t, \rho(e, t') = 1$. An additive network can only gain edges
+  over time.
+
+  A temporal network is said to be \emph{dismantling} if for all
+  $e\in E$ and $t\in\mathcal{T}$, if $\rho(e,t)=0$, then for all
+  $t'>t, \rho(e, t') = 0$. An dismantling network can only lose edges
+  over time.
 \end{defn}
 
 \section{Examples of applications}%
@@ -151,6 +175,8 @@ convention a zero weight corresponds to an absent edge.
 
 \section{Network partitioning}%
 \label{sec:network-partitioning}
+
+%% TODO clarify, organise, references
 
 Temporal networks are a very active research subject, leading to
 multiple interesting problems. The additional time dimension adds a
@@ -195,6 +221,8 @@ outliers, or even maximise temporal communities.
 \chapter{Topological Data Analysis and Persistent Homology}%
 \label{cha:tda-ph}
 
+%% TODO references
+
 \section{Basic constructions}%
 \label{sec:basic-constructions}
 
@@ -202,9 +230,9 @@ outliers, or even maximise temporal communities.
 \label{sec:homology}
 
 Our goal is to understand the topological structure of a metric
-space. For this, we can use \emph{homology}, which consists in
-associating for a metric space $X$ and a dimension $i$ a vector space
-$H_i(X)$. The dimension of $H_i(X)$ will give us the number of
+space. For this, we can use \emph{homology}, which consists of
+associating a vector space $H_i(X)$ to a metric space $X$ and a
+dimension $i$. The dimension of $H_i(X)$ gives us the number of
 $i$-dimensional components in $X$: the dimension of $H_0(X)$ is the
 number of path-connected components in $X$, the dimension of $H_1(X)$
 is the number of holes in $X$, and the dimension of $H_2(X)$ is the
@@ -217,28 +245,27 @@ space can be extremely difficult. It is necessary to approximate it in
 a structure that would be both combinatorial and topological in
 nature.
 
-\subsection{Simplicial Complexes}%
+\subsection{Simplicial complexes}%
 \label{sec:simplicial-complexes}
 
-In order to understand the topological structure of a metric space, we
-need a way to decompose it in smaller pieces which, when assembled,
-conserve the overall organisation of the space. For this, we use a
-structure called a \emph{simplicial complex}, which is a kind of
-higher-dimensional generalization of graphs.
+To understand the topological structure of a metric space, we need a
+way to decompose it in smaller pieces that, when assembled, conserve
+the overall organisation of the space. For this, we use a structure
+called a \emph{simplicial complex}, which is a kind of
+higher-dimensional generalization of a graph.
 
-The building blocks of this representation will be \emph{simplexes},
-which are simply the convex hull of an arbitrary set of
-points. Examples of simplexes include single points, segments,
-triangles, and tetrahedrons (in dimensions 0, 1,, 2, and 3
-respectively).
+The building blocks of this representation is the \emph{simplex},
+which is the convex hull of an arbitrary set of points. Examples of
+simplices include single points, segments, triangles, and tetrahedrons
+(in dimensions 0, 1,, 2, and 3 respectively).
 
 \begin{defn}[Simplex]
-  The \emph{$k$-dimensional simplex} $\sigma = [x_0,\ldots,x_k]$ is
-  the convex hull of the set $\{x_0,\ldots,x_k\} \in \mathbb{R}^d$,
-  where $x_0,\ldots,x_k$ are affinely independent. $x_0,\ldots,x_k$
-  are called the \emph{vertices} of $\sigma$, and the simplexes
-  defined by the subsets of $\{x_0,\ldots,x_k\}$ are called the
-  \emph{faces} of $\sigma$.
+  A \emph{$k$-dimensional simplex} $\sigma = [x_0,\ldots,x_k]$ is the
+  convex hull of the set $\{x_0,\ldots,x_k\} \in \mathbb{R}^d$, where
+  $x_0,\ldots,x_k$ are affinely independent. $x_0,\ldots,x_k$ are
+  called the \emph{vertices} of $\sigma$, and the simplices defined by
+  the subsets of $\{x_0,\ldots,x_k\}$ are called the \emph{faces} of
+  $\sigma$.
 \end{defn}
 
 \begin{figure}[ht]
@@ -284,22 +311,22 @@ respectively).
     \caption{Triangle}
   \end{subfigure}%
   % 
-  \caption{Examples of simplexes}%
+  \caption{Examples of simplices}%
   \label{fig:simplex}
 \end{figure}
 
 
-We then need a way to combine these basic building blocks meaningfully
+We then need a way to meaningfully combine these basic building blocks
 so that the resulting object can adequately reflect the topological
 structure of the metric space.
 
 \begin{defn}[Simplicial complex]
-  A \emph{simplicial complex} is a collection $K$ of simplexes such
+  A \emph{simplicial complex} is a collection $K$ of simplices such
   that:
   \begin{itemize}
   \item any face of a simplex of $K$ is a simplex of $K$
-  \item the intersection of two simplexes of $K$ is either the empty
-    set or a common face or both.
+  \item the intersection of two simplices of $K$ is either the empty
+    set, or a common face, or both.
   \end{itemize}
 \end{defn}
 
@@ -340,13 +367,13 @@ structure of the metric space.
         \draw (5) -- (6) -- (4) -- (7);
       \end{scope}
   \end{tikzpicture}
-  \caption{Example of a simplicial complex, with two connected
-    components, two 3-simplexes, and one 5-simplex.}%
+  \caption{Example of a simplicial complex that has two connected
+    components, two 3-simplices, and one 5-simplex.}%
   \label{fig:simplical-complex}
 \end{figure}
 
 The notion of simplicial complex is closely related to that of a
-hypergraph. The important distinction lies in the fact that a subset
+hypergraph. One important distinction lies in the fact that a subset
 of a hyperedge is not necessarily a hyperedge itself.
 
 Using these definitions, we can define homology on simplicial
@@ -355,20 +382,21 @@ complexes. %% TODO add reference for more details/do it myself?
 \subsection{Filtrations}%
 \label{sec:filtrations}
 
+%% TODO rewrite it using the Cech complex as an introductory example,
+%% to understand the problem with scale
+
 If we consider that a simplicial complex is a kind of
-``discretization'' of a metric space, we realise that there must be an
-issue of \emph{scale}. For our analysis to be invariant under small
-perturbations in the data, we need a way to find the optimal scale
-parameter to capture the adequate topological structure, without
-taking into account some small perturbations, nor ignoring some
-important smaller features.
+``discretization'' of a subset of a metric space, we realise that
+there must be an issue of \emph{scale}. For our analysis to be
+invariant under small perturbations in the data, we need a way to find
+the optimal scale parameter to capture the adequate topological
+structure, without taking into account some small perturbations, nor
+ignoring some important smaller features.
 
-%% TODO rewrite using the Cech filtration as an example?
+One possible solution to these problems is to consider all scales at
+once. This is the objective of \emph{filtered simplicial complexes}.
 
-The ideal solution to these problems is to consider all scales at
-once: this is the objective of \emph{filtered simplicial complexes}.
-
-\begin{defn}[Filtration]
+\begin{defn}[Filtration]\label{defn:filt}
   A \emph{filtered simplicial complex}, or simply a \emph{filtration},
   $K$ is a sequence ${(K_i)}_{i\in I}$ of simplicial complexes such
   that:
@@ -384,8 +412,8 @@ once: this is the objective of \emph{filtered simplicial complexes}.
 We can now compute the homology for each step in a filtration. This
 leads to the notion of \emph{persistent
   homology}~\cite{carlsson_topology_2009,zomorodian_computing_2005},
-which gives us all the information necessary to establish the
-topological structure of the metric space at multiple scales.
+which gives all the information necessary to establish the topological
+structure of a metric space at multiple scales.
 
 \begin{defn}[Persistent homology]
   The \emph{$p$-th persistent homology} of a simplicial complex
@@ -395,44 +423,85 @@ topological structure of the metric space at multiple scales.
   by the inclusion map $K_i \mapsto K_j$.
 \end{defn}
 
-The functions $f_{i,j}$ allow us to link generators in each successive
-homology space in the filtration. Since each generator correspond to a
-topological feature (connected component, hole, void, etc, depending
-on the dimension $p$), we can determine whether it survives in the
-next step of the filtration. We can now determine when each feature is
-born and when it dies (if it dies at all). This representation will be
-dependent on the choice of basis for each homology space
-$H_p(K_i)$. However, by the Fundamental Theorem of Persistent
-Homology, we can choose base vectors in each homology space such that
-the collection of half-open intervals is well-defined and unique. This
-construction is called a \emph{barcode}.
-%% TODO references for the Fundamental Theorem
+The functions $f_{i,j}$ allow one to link generators in each
+successive homology space in a filtration. Because each generator
+corresponds to a topological feature (connected component, hole, void,
+and so on, depending on the dimension $p$), we can determine whether
+it survives in the next step of the filtration. We can also determine
+when each feature is born and when it dies (if it dies at all). The
+couples of intervals (birth time, death time) depends on the choice of
+basis for each homology space $H_p(K_i)$. However, by the Fundamental
+Theorem of Persistent Homology~\cite{zomorodian_computing_2005}, we
+can choose basis vectors in each homology space such that the
+collection of half-open intervals is well-defined and unique. This
+construction is called a \emph{barcode}~\cite{carlsson_topology_2009}.
 
 \section{Topological summaries: barcodes and persistence diagrams}%
 \label{sec:topol-summ}
 
-In order to interpret the results of the persistent homology
-computation, we need to compare the output for a particular data set
-to a suitable null model. For this, we need some kind of similarity
-measure between barcodes and a way to evaluate the statistical
-significance of the results.
+%% TODO need more context
 
-One possible approach for this is to define a space in which we can
-project barcodes and study their geometric
-properties. \emph{Persistence diagrams} are an example of such a
-space.
+To interpret the results of the persistent-homology computation, we
+need to compare the output for a particular data set to a suitable
+null model. For this, we need some kind of similarity measure between
+barcodes and a way to evaluate the statistical significance of the
+results.
+
+One possible approach is to define a space in which we can project
+barcodes and study their geometric properties. One such space is the
+space of \emph{persistence
+  diagrams}~\cite{edelsbrunner_computational_2010}.
+
+\begin{defn}[Multiset]
+  A \emph{multiset} $M$ is the couple $(A, m)$, where $A$ is the
+  \emph{underlying set} of $M$, formed by its distinct elements, and
+  $m : A\mapsto\mathbb{N}^*$ is the \emph{multiplicity function}
+  giving the number of occurrences of each element of $A$ in $M$.
+\end{defn}
 
 \begin{defn}[Persistence diagrams]
   A \emph{persistence diagram} is the union of a finite multiset of
-  points in $\overline{\mathbb{R}}^2$ zith the diagonal
+  points in $\overline{\mathbb{R}}^2$ with the diagonal
   $\Delta = \{(x,x) \;|\; x\in\mathbb{R}^2\}$, where every point of
   $\Delta$ has infinite multiplicity.
 \end{defn}
 
-The diagonal $\Delta$ is added to facilitate comparisons between
-diagrams, as points near the diagonal correspond to short-lived
-topological feature, thus likely to be caused by small perturbations
-in the data.
+One adds the diagonal $\Delta$ for technical reasons. It is convenient
+to compare persistence diagrams by using bijections between them, so
+persistence diagrams must have the same cardinality.
+
+In some cases, the diagonal in the persistence diagrams can also
+facilitate comparisons between diagrams, as points near the diagonal
+correspond to short-lived topological features, so they are likely to
+be caused by small perturbations in the data.
+
+One can build a persistence diagram from a barcode by taking the union
+of the multiset of (birth, death) couples with the diagonal
+$\Delta$. \autoref{fig:pipeline} summarises the entire pipeline.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \tikzstyle{pipelinestep}=[rectangle,thick,draw=black,inner sep=5pt,minimum size=15pt]
+    \node (data)[pipelinestep] {Data};
+    \node (filt)[pipelinestep,right=1cm of data] {Filtered complex};
+    %% \node (barcode)[pipelinestep,right=1cm of filt] {Barcodes};
+    \node (dgm)[pipelinestep,right=1cm of filt] {Persistence diagram};
+    \node (interp)[pipelinestep,right=1cm of dgm] {Interpretation};
+
+    \draw[->] (data.east) -- (filt.west);
+    %% \draw[->] (filt.east) -- (barcode.west);
+    \draw[->] (filt.east) -- (dgm.west);
+    \draw[->] (dgm.east) -- (interp.west);
+  \end{tikzpicture}
+
+  \caption{Persistent homology pipeline}%
+  \label{fig:pipeline}
+\end{figure}
+
+One can define an operator $\dgm$ as the first two steps in the
+pipeline. It constructs a persistence diagram from a subset of a
+metric space, via persistent homology on a filtered complex.
 
 We can now define several distances on the space of persistence
 diagrams.
@@ -441,7 +510,7 @@ diagrams.
   The \emph{$p$-th Wasserstein distance} between two diagrams $X$ and
   $Y$ is
   \[ W_p[d](X, Y) = \inf_{\phi:X\mapsto Y} \left[\sum_{x\in X} {d\left(x, \phi(x)\right)}^p\right] \]
-  for $p\in [1,\infty)$, and
+  for $p\in [1,\infty)$, and:
   \[ W_\infty[d](X, Y) = \inf_{\phi:X\mapsto Y} \sup_{x\in X} d\left(x,
       \phi(x)\right) \] for $p = \infty$, where $d$ is a distance on
   $\mathbb{R}^2$ and $\phi$ ranges over all bijections from $X$ to
@@ -450,25 +519,27 @@ diagrams.
 
 \begin{defn}[Bottleneck distance]
   The \emph{bottleneck distance} is defined as the infinite
-  Wasserstein distance with $d$ the uniform norm:
+  Wasserstein distance where $d$ is the uniform norm:
   $d_B = W_\infty[L_\infty]$.
 \end{defn}
 
-Since the bottleneck distance is by far the most commonly used, we
-will focus on it in the following. It is symmetric, non-negative, and
-satisfies the triangle inequality. However, it is not a true distance,
-as it is fairly straightforward to come up with two distinct diagrams
-at bottleneck distance zero, even on multisets not touching the
-diagonal $\Delta$.
+The bottleneck distance is symmetric, non-negative, and satisfies the
+triangle inequality. However, it is not a true distance, as one can
+come up with two distinct diagrams with bottleneck distance 0, even
+on multisets that do not touch the diagonal $\Delta$.
 
 \section{Stability}%
 \label{sec:stability}
 
-One of the most important aspects of Topological Data Analysis is that
+One of the most important aspects of topological data analysis is that
 it is \emph{stable} with respect to small perturbations in the
-data. In fact, the persistence diagram operator is Lipschitz with
-respect to the bottleneck distance. First, we define a distance
-between subsets of a metric space.
+data. More precisely, the second step of the pipeline
+in~\autoref{fig:pipeline} is Lipschitz with respect to a suitable
+metric on filtered complexes and the bottleneck distance on
+persistence
+diagrams~\cite{cohen-steiner_stability_2007,chazal_persistence_2014}. First,
+we define a distance between subsets of a metric
+space~\cite{oudot_persistence_2015}.
 
 \begin{defn}[Hausdorff distance]
   Let $X$ and $Y$ be subsets of a metric space $(E, d)$. The
@@ -477,7 +548,8 @@ between subsets of a metric space.
       \sup_{y\in Y} \inf_{x\in X} d(x,y) \right]. \]
 \end{defn}
 
-We can now give the proper stability property.
+We can now give an appropriate stability
+property~\cite{cohen-steiner_stability_2007,chazal_persistence_2014}.
 
 \begin{prop}
   Let $X$ and $Y$ be subsets in a metric space. We have
@@ -490,6 +562,14 @@ We can now give the proper stability property.
 %% TODO
 \cite{morozov_dionysus:_2018,bauer_ripser:_2018,reininghaus_dipha_2018,maria_gudhi_2014}
 
+\section{Discussion}%
+\label{sec:discussion}
+
+%% TODO
+
+%% information thrown away in filtrations and in PH
+
+
 \chapter{Topological Data Analysis on Networks}%
 \label{cha:topol-data-analys}
 
@@ -498,49 +578,54 @@ We can now give the proper stability property.
 
 We now consider the problem of applying persistent homology to network
 data. An undirected network is already a simplicial complex of
-dimension 1. However, this will not be sufficient to capture enough
-topological information: we need to introduce higher-dimensional
-simplexes. The first possible method is to project the network on a
-metric space~\cite{otter_roadmap_2017}, thus transforming the network
-data into a point cloud data. For this, we need to compute the
-distance between each pair of nodes in the network (with the shortest
-path distance for instance). This also requires the network to be
-connected.
+dimension 1. However, this is not sufficient to capture enough
+topological information; we need to introduce higher-dimensional
+simplices. One method is to project the nodes of a network onto a
+metric space~\cite{otter_roadmap_2017}, thereby transforming the
+network data into a point-cloud data. For this, we need to compute the
+distance between each pair of nodes in the network (e.g.\ with the
+shortest-path distance). This also requires the network to be
+connected. %% TODO defn of connected?
 
-Another usual method for weighted networks is called the \emph{weight
-  rank clique filtration} (WRCF)~\cite{petri_topological_2013}, which
-filters the network based on weights. The procedure works as follows:
+Another common method, for weighted networks, is called the
+\emph{weight rank-clique filtration}
+(WRCF)~\cite{petri_topological_2013}, which filters a network based
+on weights. The procedure works as follows:
 \begin{enumerate}
-\item Set the set of all nodes, without any edge, as filtration
-  step~0.
+\item Consider the set of all nodes, without any edge, to be
+  filtration step~0.
 \item Rank all edge weights in decreasing order $\{w_1,\ldots,w_n\}$.
 \item At filtration step $t$, keep only the edges whose weights are
-  less than $w_t$, thus creating an unweighted graph.
+  larger than or equal to $w_t$, thereby creating an unweighted graph.
 \item Define the maximal cliques of the resulting graph to be
-  simplexes.
+  simplices.
 \end{enumerate}
 
 At each step of the filtration, we construct a simplicial complex
-based on cliques: this is called a \emph{clique complex}. It is
-necessarily valid since a subset of a clique is necessarily a clique
-itself, and the same is true for the intersection of two cliques.
+based on cliques; this is called a \emph{clique
+  complex}~\cite{zomorodian_tidy_2010}. The result of the algorithm is
+itself a filtered simplicial complex (\autoref{defn:filt}), because a
+subset of a clique is necessarily a clique itself, and the same is
+true for the intersection of two cliques.
 
 This leads to a first possibility for applying persistent homology to
-temporal networks. It is possible to segment the lifetime of the
-network into sliding windows, creating a static graph on each window
+temporal networks. It is possible to segment the lifetime of a network
+into sliding windows, creating a time-independent graph on each window
 by retaining only the edges available during the time interval. We can
-then apply WRCF on each static graph in the sequence, obtaining a
-filtered complex for each window, to which we can then apply
-persistent homology.
+then apply WRCF on each graph in the sequence, obtaining a filtered
+complex for each window, to which we can then apply persistent
+homology.
 
 This method can quickly become very computationally expensive, as
-finding all maximal cliques (using the Bron-Kerbosch algorithm for
-example) is a complicated problem in itself. In practice, we often
-restrict the search to cliques of dimension lower than a certain bound
-$d_M$. With this restriction, the new simplicial complex is
-homologically equivalent to the original: they have the same homology
-groups up to $H_{d_M-1}$.
+finding all maximal cliques (e.g.\ using the Bron--Kerbosch algorithm)
+is a complicated problem, with an optimal computational complexity of
+$\mathcal{O}\big(3^{n/3}\big)$~\cite{tomita_worst-case_2006}. In
+practice, one often restrict the search to cliques of dimension less
+than or equl to a certain bound $d_M$. With this restriction, the new
+simplicial complex is homologically equivalent to the original: they
+have the same homology groups up to $H_{d_M-1}$.
 
+%% TODO rewrite this paragraph
 This method is sensitive to the choice of sliding windows on the time
 scale. The width and the overlap of the windows can completely change
 the networks created and their topological features. Too small a
@@ -552,24 +637,24 @@ in the evolution of the network over time.
 \label{sec:zigzag-persistence}
 
 The standard algorithm to compute persistent homology
-(\autoref{sec:persistent-homology}) only works for filtrations which
-are nested sequences of simplicial complexes:
+(see~\autoref{sec:persistent-homology}) relies on the fact that
+filtrations (see~\autoref{defn:filt}) are nested sequences of
+simplicial complexes:
 \[ \cdots \subseteq K_{i-1} \subseteq K_i \subseteq K_{i+1} \subseteq
   \cdots \]
 
-When studying temporal networks, we have two possibilities:
-\begin{itemize}
-\item Create an independent filtration (e.g.\ WRCF) from each time
-  step. The issue is that the topological features will be completely
-  disconnected from the time dimension.
-\item Create a filtration along the time dimension. The issue in this
-  case is that the sequence is no longer nested (except for additive
-  temporal networks, ie when edges are never deleted).
-\end{itemize}
+One can now create an independent filtration (e.g.\ with WRCF) for
+each time step. The issue is that the topological features will be
+orthogonal to the time dimension.
+
+Another possibility is to create a filtration along the time
+dimension. The issue in this case is that the sequence is no longer
+nested (except for additive or dismantling temporal networks,
+see~\autoref{defn:additive}).
 
 The solution to consider the time dimension is provided by
-\emph{zigzag persistence}~\cite{carlsson_zigzag_2009}, which allows to
-compute persistence on alternating nested sequences:
+\emph{zigzag persistence}~\cite{carlsson_zigzag_2009}, which allows
+one to compute persistence on alternating nested sequences:
 \[ \cdots \supseteq K_{i-1} \subseteq K_i \supseteq K_{i+1} \subseteq
   \cdots \]
 
@@ -580,22 +665,23 @@ constructing an alternating sequence.
 Zigzag persistence is a special case of the more general concept of
 \emph{multi-parameter
   persistence}~\cite{carlsson_theory_2009,dey_computing_2014}, where
-filtrations can span across multiple parameters.
+filtrations can encompass multiple parameters.
 
 %% Note about libraries implementing zigzag persistence: Dionysus
 
-\chapter{Persistent Homology for Machine Learning applications}%
+\chapter{Persistent Homology for Machine-Learning Applications}%
 \label{cha:pers-homol-mach}
 
 The output of persistent homology is not directly usable by most
-statistical methods. Barcodes and persistence diagrams, being a
-multiset of points in $\overline{\mathbb{R}}^2$, are not elements of a
-metric space in which we could perform statistical computations.
+statistical methods. For example, barcodes and persistence diagrams,
+which are multisets of points in $\overline{\mathbb{R}}^2$, are not
+elements of a metric space in which one can perform statistical
+computations.
 
 The distances between persistence diagrams defined
-in~\autoref{sec:topol-summ} allow us to compare different
+in~\autoref{sec:topol-summ} allow one to compare different
 outputs. From a statistical perspective, it is possible to use a
-generative model of simplicial complexes, and use a distance between
+generative model of simplicial complexes and to use a distance between
 persistence diagrams to measure the similarity of our observations
 with this null model~\cite{adler_persistent_2010}. This would
 effectively define a metric space of persistence diagrams. It is even
@@ -603,8 +689,10 @@ possible to define some statistical summaries (means, medians,
 confidence intervals) on these
 spaces~\cite{turner_frechet_2014,munch_probabilistic_2015}.
 
+%% TODO REFERENCES
+
 The issue with this approach is that metric spaces do not offer enough
-algebraic structure to be amenable to most machine learning
+algebraic structure to be amenable to most machine-learning
 techniques. One of the most recent development in the study of
 topological summaries has been to find mappings between the space of
 persistence diagrams and Banach spaces.
@@ -616,38 +704,37 @@ persistence diagrams and Banach spaces.
 
 \subsection{Persistence landscapes}
 
-Persistence landscapes~\cite{bubenik_statistical_2015} are a mean to
-project the barcodes in a space where it will be possible to add them
-meaningfully. It would thus be possible to define means of persistence
-diagrams, along other summary statistics.
+Persistence landscapes~\cite{bubenik_statistical_2015} give a way to
+project barcodes to a space where it is possible to add them
+meaningfully. It is then possible to define means of persistence
+diagrams, as well as other summary statistics.
 
-As all the other vectorization techniques mentioned here, this
-approach is \emph{injective}, but not surjective, and no explicit
-inverse exists to go back from a persistence landscape to the
-corresponding persistence diagram. Moreover, a mean of persistence
-landscapes do not necessarily have a corresponding persistence
-diagram.
+The function mapping a persistence diagram to a persistence landscape
+is \emph{injective}, but no explicit inverse exists to go back from a
+persistence landscape to the corresponding persistence
+diagram. Moreover, a mean of persistence landscapes does not
+necessarily have a corresponding persistence diagram.
 
 \begin{defn}[Persistence landscape]
   The persistence landscape of a diagram $D = \{(b_i,d_i)\}_{i=1}^n$
   is the set of functions $\lambda_k: \mathbb{R} \mapsto \mathbb{R}$,
-  for $k\in\mathbb{N}$ such that
+  for $k\in\mathbb{N}$, such that
   \[ \lambda_k(x) = k\text{-th largest value of } \{f_{(b_i,
-      d_i)}(x)\}_{i=1}^n, \] (or zero if the $k$-th largest value does
-  not exist), where $f_{(b,d)}$ is a piecewise linear function defined by:
+      d_i)}(x)\}_{i=1}^n, \] (and $\lambda_k(x) = 0$ if the $k$-th
+  largest value does not exist), where $f_{(b,d)}$ is a
+  piecewise-linear function defined by:
   \[ f_{(b,d)} =
     \begin{cases}
-      0& \text{if }x \notin (b,d)\\
-      x-b& \text{if }x\in (b,\frac{b+d}{2})\\
-      -x+d& \text{if }x\in (\frac{b+d}{2},d).
+      0,& \text{if }x \notin (b,d),\\
+      x-b,& \text{if }x\in (b,\frac{b+d}{2}),\\
+      -x+d,& \text{if }x\in (\frac{b+d}{2},d)\,.
     \end{cases}
   \]
 \end{defn}
 
-The persistence landscape is thus a kind of superposition of piecewise
-linear functions. Moreover, one can show that persistence landscapes
-are stable with respect to the $L^p$ distance, and that the
-Wasserstein and bottleneck distances are bounded by the $L^p$
+Moreover, one can show that persistence landscapes are stable with
+respect to the $L^p$ distance, and that the Wasserstein and bottleneck
+distances are bounded by the $L^p$
 distance~\cite{bubenik_statistical_2015}. We can thus view the
 landscapes as elements of a Banach space in which we can perform the
 statistical computations.
@@ -667,7 +754,7 @@ statistical computations.
 
 \cite{reininghaus_stable_2015,kwitt_statistical_2015}
 
-\subsection{Persistence weighted Gaussian kernel}
+\subsection{Persistence weighted-Gaussian kernel}
 
 \cite{kusano_kernel_2017}
 
@@ -677,6 +764,9 @@ statistical computations.
 
 \section{Comparison}%
 \label{sec:comparison}
+
+\chapter{Conclusions}%
+\label{cha:conclusions}
 
 
 
