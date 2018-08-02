@@ -15,16 +15,40 @@
     \vspace{1cm}
     \textsf{\Huge{University of Oxford}}\\
     \vspace{1cm}
-    \includegraphics[scale=.8]{Stats_Logo.png}\\
+    \includegraphics{branding/beltcrest.png}\\
     \vspace{2cm}
     \Huge{\thetitle}\\
     \vspace{2cm}
-    \large{by\\[14pt]\theauthor\\[8pt]St Catherine's College}\\
+    \large{by\\[14pt]\theauthor\\[8pt]St Catherine's College}
+    \vfill
+    %% Inkscape L-system
+    %% [C]++[C]++[C]++[C]++[C]
+    %% B=DA++EA----CA[-DA----BA]++;C=+DA--EA[---BA--CA]+;D=-BA++CA[+++DA++EA]-;E=--DA++++BA[+EA++++CA]--CA;A=
+    \begin{tikzpicture}
+      \pgfdeclarelindenmayersystem{Penrose}{
+        \symbol{M}{\pgflsystemdrawforward}
+        \symbol{N}{\pgflsystemdrawforward}
+        \symbol{O}{\pgflsystemdrawforward}
+        \symbol{P}{\pgflsystemdrawforward}
+        \symbol{A}{\pgflsystemdrawforward}
+        \symbol{+}{\pgflsystemturnright}
+        \symbol{-}{\pgflsystemturnleft}
+        \rule{M->OA++PA----NA[-OA----MA]++}
+        \rule{N->+OA--PA[---MA--NA]+}
+        \rule{O->-MA++NA[+++OA++PA]-}
+        \rule{P->--OA++++MA[+PA++++NA]--NA}
+        \rule{A->}
+      }
+      \draw[lindenmayer system={Penrose, axiom=[N]++[N]++[N]++[N]++[N],
+        order=2, angle=36, step=4pt}]
+      lindenmayer system;
+    \end{tikzpicture}
     % \vspace{2.2cm}
     \vfill
-    \large{A dissertation submitted in partial fulfilment of the degree of Master of Science in Applied Statistics}\\
+    \large{A dissertation submitted in partial fulfilment of the degree of\\
+      Master of Science in Applied Statistics}\\
     \vspace{.5cm}
-    \large{\emph{Department of Statistics, 24--29 St Giles,\\Oxford, OX1 3LB}}\\
+    \large{\emph{Department of Statistics,\\ 24--29 St Giles, Oxford, OX1 3LB}}\\
     \vspace{1cm}
     \large{\thedate}
   \end{center}
