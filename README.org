@@ -1,0 +1,42 @@
+* Topological Data Analysis of Temporal Networks
+
+Repository for my Master's thesis project. See the [[file:dissertation/dissertation.pdf][dissertation]].
+
+** Abstract
+
+   Temporal networks are a mathematical model to represent interactions
+   evolving over time. As such, they have a multitude of applications,
+   from biology to physics to social networks. The study of dynamics on
+   networks is an emerging field, with many challenges in modelling and
+   data analysis.
+
+   An important issue is to uncover meaningful temporal structure in a
+   network. We focus on the problem of periodicity detection in
+   temporal networks, by partitioning the time range of the network and
+   clustering the resulting subnetworks.
+
+   For this, we leverage methods from the field of topological data
+   analysis and persistent homology. These methods have begun to be
+   employed with static graphs in order to provide a summary of
+   topological features, but applications to temporal networks have
+   never been studied in detail.
+
+   We cluster temporal networks by computing the evolution of
+   topological features over time. Applying persistent homology to
+   temporal networks and comparing various approaches has never been
+   done before, and we examine their performance side-by-side with a
+   simple clustering algorithm. Using a generative model, we show that
+   persistent homology is able to detect periodicity in the topological
+   structure of a network.
+
+   We define two types of topological features, with and without
+   aggregating the temporal networks, and multiple ways of embedding
+   them in a feature space suitable for machine-learning
+   applications. In particular, we examine the theoretical guarantees
+   and empirical performance of kernels defined on topological
+   features.
+
+   Topological insights prove to be useful in statistical learning
+   applications. Combined with the recent advances in network science,
+   they lead to a deeper understanding of the structure of temporal
+   networks.
