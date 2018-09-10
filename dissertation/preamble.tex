@@ -1,8 +1,21 @@
 \usepackage{fontspec}
 
-\setmainfont{Linux Libertine O}
-\setsansfont{Linux Biolinum O}
-\setmonofont[Scale=0.83]{Inconsolata}
+% \setmainfont{Linux Libertine O}
+% \setsansfont{Linux Biolinum O}
+% \setmonofont[Scale=0.83]{Inconsolata}
+
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+\setmonofont[Scale=0.95]{Inconsolata}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{unicode-math}
+%\setmathfont{Libertinus Math}
+\usepackage[ruled]{algorithm2e}
+
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 
 \usepackage{polyglossia}
 \setdefaultlanguage[variant=british]{english}
@@ -10,26 +23,26 @@
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{wrapfig}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{lettrine}
 
-\usepackage{amssymb, amsmath}
-\usepackage{amsthm}
+\usepackage{thmtools}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
-\newcommand{\thmautorefname}{theorem}
+%\newcommand{\thmautorefname}{theorem}
 \newtheorem{lem}[thm]{Lemma}
-\newcommand{\lemautorefname}{lemma}
+%\newcommand{\lemautorefname}{lemma}
 \newtheorem{cor}[thm]{Corollary}
-\newcommand{\corautorefname}{corollary}
+%\newcommand{\corautorefname}{corollary}
 \newtheorem{prop}[thm]{Proposition}
-\newcommand{\propautorefname}{proposition}
+%\newcommand{\propautorefname}{proposition}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[chapter]
-\newcommand{\defnautorefname}{definition}
+%\newcommand{\defnautorefname}{definition}
 \newtheorem{expl}{Example}[chapter]
-\newcommand{\explautorefname}{example}
+%\newcommand{\explautorefname}{example}
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -39,10 +52,11 @@
 
 \usepackage{tikz-network}
 \usepackage{tikz}
-\usetikzlibrary{patterns,backgrounds,positioning,chains,lindenmayersystems}
+\usetikzlibrary{patterns,backgrounds,positioning,chains,lindenmayersystems,intersections}
 
-\usepackage[style=numeric-comp,backref,url=false]{biblatex}
-\bibliography{TDA,temporalgraphs}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=numeric-comp,backref,url=false,minnames=3]{biblatex}
+\bibliography{TDA,temporalgraphs,Other}
 
 \usepackage{pdfpages}
 
@@ -61,8 +75,11 @@
   linkcolor=MidnightBlue,
   filecolor=MidnightBlue,
   urlcolor=MidnightBlue,
-  citecolor=Green
+  citecolor=MidnightBlue
 }
+
+\usepackage{minted}
+\setminted{autogobble,fontsize=\footnotesize,linenos,stepnumber=5}
 
 %% Pour la classe memoir /!\
 
@@ -72,12 +89,12 @@
 \checkandfixthelayout%
 
 %% Numérotation des divisions logiques
-\setsecnumdepth{subsection}
-\maxsecnumdepth{subsection}
+\setsecnumdepth{subsubsection}
+\maxsecnumdepth{subsubsection}
 
 %% Profondeur de la ToC
-\settocdepth{subsection}
-\maxtocdepth{subsection}
+\settocdepth{subsubsection}
+\maxtocdepth{subsubsection}
 
 %% Style des titres des divisions logiques
 \setsecheadstyle{\Large\scshape}
@@ -95,6 +112,7 @@
 %% Couleurs
 %\definecolor{purpletouch}{RGB}{103,30,117}
 \definecolor{bleux}{RGB}{0,62,92}
+\definecolor{OxfordBlue}{RGB}{0,33,71}
 
 \author{Dimitri Lozeve}
 \date{September 2018}
