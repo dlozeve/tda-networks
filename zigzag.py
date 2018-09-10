@@ -1,19 +1,24 @@
+#!/usr/bin/env python3
+
 import numpy as np
 import igraph as ig
 import dionysus as d
 
-import pickle
-import matplotlib.pyplot as plt
-
-plt.style.use("fivethirtyeight")
-plt.rcParams["figure.figsize"] = 10, 6
-
 
 def sliding_windows(g, res=0.1, overlap=0):
+    """Compute subnetworks of a temporal network based on temporal
+    partitioning of the time range.
+
+    :param g: igraph Graph
+    :param res: resolution
+    :param overlap: overlap
+
+    :return: a list of temporal networks.
+    """
     times = np.array(g.es["time"])
     duration = res * (times.max() - times.min())
     windows = []
-    for i in range(int(1/res)-1):
+    for i in range(int(1/res)):
         edges = g.es.select(time_gt=times.min() + duration*i,
                             time_lt=times.min() + duration*(i+1))
         windows.append(g.subgraph_edges(edges))
@@ -21,10 +26,14 @@ def sliding_windows(g, res=0.1, overlap=0):
 
 
 def max_simplicial_complex(g):
+    """Return the maximal simplicial complex of a network g.
+    """
     return d.Filtration(g.maximal_cliques())
 
 
 def find_transitions(a):
+    """Find the transition times in an array of presence times.
+    """
     res = []
     prev = False
     for i, cur in enumerate(a):
@@ -35,6 +44,14 @@ def find_transitions(a):
 
 
 def presence_times(g):
+    """Compute the data required to compute zigzag persistence:
+    simplicial complex and transition times.
+
+    :param g: igraph Graph
+
+    :return: a tuple with the maximum simplicial complex and the
+             transition times of each simplex.
+    """
     max_simplicial_complex = d.Filtration(g.cliques())
     filts = []
     for t in np.sort(np.unique(g.es["time"])):
@@ -46,27 +63,13 @@ def presence_times(g):
     return (max_simplicial_complex, presences)
 
 
-if __name__ == "__main__":
-    # Import the data
-    g = ig.read("data/sociopatterns/infectious/infectious.graphml")
-    print(g.summary())
-    # Segment the network into sliding windows (resolution = 5%)
-    wins = sliding_windows(g, 0.05)
-    # Compute the presence times of maximal simplices for an example window
-    print(wins[0].summary())
-    (f, t) = presence_times(wins[0])
-    for s in f:
-        print(s)
-    print(t)
-    # Compute the zigzag homology on the window
-    print("Computing zigzag persistence...")
-    zz, dgms, cells = d.zigzag_homology_persistence(f, t)
-    for i, dgm in enumerate(dgms):
-        print("Dimension: {}".format(i))
-        for p in dgm:
-            print(p)
-    # pickle.dump(dgms, open("diagrams.p", "wb"))
-    # Plot the persistence diagrams
-    # for i, dgm in enumerate(dgms):
-    #     d.plot.plot_diagram(dgm, show=False)
-    #     plt.savefig("dgm_{}.png".format(i))
+def zigzag_network(g):
+    """Compute zigzag persistence on a temporal network.
+
+    :param g: igraph Graph
+
+    :return: a list of persistence diagrams.
+    """
+    (f, t) = presence_times(g)
+    _, dgms, _ = d.zigzag_homology_persistence(f, t)
+    return dgms
