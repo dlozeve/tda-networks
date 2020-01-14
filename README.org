@@ -2,6 +2,8 @@
 
 Repository for my Master's thesis project. See the [[file:dissertation/dissertation.pdf][dissertation]].
 
+[[https://zenodo.org/badge/latestdoi/123611777][https://zenodo.org/badge/123611777.svg]]
+
 ** Abstract
 
    Temporal networks are a mathematical model to represent interactions
